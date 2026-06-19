@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ guild.name }} — Moderation{% endblock %}
+{% block content %}
+<body data-guild-id="{{ guild.id }}">
+<div class="page-header">
+    <div class="page-header-left">
+        <h1>🔨 Moderation</h1>
+        <p>{{ guild.name }}</p>
+    </div>
+    <a href="/dashboard/{{ guild.id }}" class="btn btn-outline">← Back</a>
+</div>
+<div class="section">
+    <div class="section-header">
+        <h2>XP Leaderboard</h2>
+        <p>Top members by XP</p>
+    </div>
+    <div id="leaderboard-table"><div class="empty-state"><p>Loading...</p></div></div>
+</div>
+{% endblock %}

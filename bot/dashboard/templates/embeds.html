@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ guild.name }} — Embed Builder{% endblock %}
+{% block content %}
+<body data-guild-id="{{ guild.id }}">
+<div class="page-header">
+    <div class="page-header-left">
+        <h1>🎨 Embed Builder</h1>
+        <p>{{ guild.name }}</p>
+    </div>
+    <a href="/dashboard/{{ guild.id }}" class="btn btn-outline">← Back</a>
+</div>
+<div class="section">
+    <div class="section-header">
+        <h2>Embed Builder</h2>
+        <p>Use <code>/embeds create</code> in Discord to open the interactive embed builder with live preview, field editor, and template saving.</p>
+    </div>
+    <div class="module-grid">
+        <div class="module-card"><span class="module-icon">✏️</span><h3>/embeds create</h3><p>Open interactive embed builder</p></div>
+        <div class="module-card"><span class="module-icon">👁️</span><h3>/embeds preview</h3><p>Preview a saved template</p></div>
+        <div class="module-card"><span class="module-icon">📤</span><h3>/embeds template</h3><p>Send a template to a channel</p></div>
+        <div class="module-card"><span class="module-icon">💾</span><h3>/embeds save</h3><p>Save an embed from a message</p></div>
+        <div class="module-card"><span class="module-icon">✏️</span><h3>/embeds edit</h3><p>Edit a saved template</p></div>
+        <div class="module-card"><span class="module-icon">🗑️</span><h3>/embeds delete</h3><p>Delete a template</p></div>
+    </div>
+</div>
+{% endblock %}

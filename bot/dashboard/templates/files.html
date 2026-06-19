@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+{% block title %}Bot Source Files — Copy Code{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div class="page-header-left">
+        <h1>📁 Bot Source Files</h1>
+        <p>Browse, copy, and download every file in the bot</p>
+    </div>
+    <div style="display:flex;gap:10px">
+        <a href="/download" class="btn btn-primary">⬇️ Download ZIP</a>
+        <a href="/dashboard" class="btn btn-outline">← Dashboard</a>
+    </div>
+</div>
+
+<div class="file-browser">
+    <!-- Sidebar -->
+    <aside class="file-tree" id="fileTree">
+        <div class="tree-header">
+            <span>📁 bot/</span>
+            <input class="tree-search" type="text" id="treeSearch" placeholder="Filter files…" oninput="filterTree(this.value)">
+        </div>
+        <ul class="tree-list" id="treeList">
+            {% for file in files %}
+            <li class="tree-item" data-path="{{ file.path }}" onclick="showFile('{{ file.path }}')">
+                <span class="tree-icon">{{ file.icon }}</span>
+                <span class="tree-name">{{ file.path }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <!-- Code viewer -->
+    <main class="file-viewer" id="fileViewer">
+        <div class="viewer-placeholder">
+            <p>👈 Select a file from the list to view its code</p>
+            <p style="color:var(--text-muted);font-size:0.85rem;margin-top:8px">{{ files|length }} files available — or <a href="/download" style="color:var(--primary)">download the full ZIP</a></p>
+        </div>
+    </main>
+</div>
+
+<!-- Hidden file data -->
+<script>
+const FILES = {
+    {% for file in files %}
+    {{ file.path | tojson }}: {
+        path: {{ file.path | tojson }},
+        language: {{ file.language | tojson }},
+        content: {{ file.content | tojson }},
+        size: {{ file.size }},
+        lines: {{ file.lines }},
+    },
+    {% endfor %}
+};
+
+function showFile(path) {
+    const f = FILES[path];
+    if (!f) return;
+
+    // Highlight active item
+    document.querySelectorAll('.tree-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.path === path);
+    });
+
+    const viewer = document.getElementById('fileViewer');
+    const escaped = escapeHtml(f.content);
+
+    viewer.innerHTML = `
+        <div class="viewer-header">
+            <div class="viewer-meta">
+                <span class="viewer-path">${f.path}</span>
+                <span class="viewer-stats">${f.lines} lines · ${formatBytes(f.size)}</span>
+            </div>
+            <div class="viewer-actions">
+                <button class="btn btn-sm btn-primary" onclick="copyCode('${path}')">📋 Copy Code</button>
+                <button class="btn btn-sm btn-outline" onclick="copyPath('${path}')">📄 Copy Path</button>
+                <a class="btn btn-sm btn-outline" href="/file/${encodeURIComponent(path)}" download="${path.split('/').pop()}">⬇️ Download</a>
+            </div>
+        </div>
+        <div class="code-container">
+            <div class="line-numbers" id="lineNums_${path.replace(/\//g,'_')}"></div>
+            <pre class="code-content" id="code_${path.replace(/\//g,'_')}">${escaped}</pre>
+        </div>
+    `;
+
+    // Build line numbers
+    const lineCount = f.lines;
+    const lineNums = document.getElementById('lineNums_' + path.replace(/\//g,'_'));
+    if (lineNums) {
+        lineNums.textContent = Array.from({length: lineCount}, (_, i) => i + 1).join('\n');
+    }
+
+    // Sync scroll
+    const pre = document.getElementById('code_' + path.replace(/\//g,'_'));
+    if (lineNums && pre) {
+        pre.parentElement.addEventListener('scroll', e => {
+            lineNums.style.marginTop = `-${pre.parentElement.scrollTop}px`;
+        });
+    }
+}
+
+function copyCode(path) {
+    const f = FILES[path];
+    if (!f) return;
+    navigator.clipboard.writeText(f.content).then(() => showToast('Code copied!'));
+}
+
+function copyPath(path) {
+    navigator.clipboard.writeText(path).then(() => showToast('Path copied!'));
+}
+
+function filterTree(q) {
+    const items = document.querySelectorAll('.tree-item');
+    q = q.toLowerCase();
+    items.forEach(el => {
+        el.style.display = el.dataset.path.toLowerCase().includes(q) ? '' : 'none';
+    });
+}
+
+function escapeHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function formatBytes(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
+    return (b/1024/1024).toFixed(2) + ' MB';
+}
+
+function showToast(msg) {
+    const t = document.createElement('div');
+    t.className = 'alert alert-success';
+    t.style.cssText = 'position:fixed;bottom:24px;right:24px;z-index:9999;min-width:200px';
+    t.textContent = '✅ ' + msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 2500);
+}
+
+// Open first file on load
+if (Object.keys(FILES).length > 0) {
+    showFile(Object.keys(FILES)[0]);
+}
+</script>
+
+<style>
+.file-browser { display: grid; grid-template-columns: 300px 1fr; gap: 16px; height: calc(100vh - 180px); min-height: 500px; }
+.file-tree { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden; }
+.tree-header { padding: 12px 16px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 0.9rem; display: flex; flex-direction: column; gap: 8px; }
+.tree-search { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; color: var(--text); font-size: 0.8rem; outline: none; }
+.tree-search:focus { border-color: var(--primary); }
+.tree-list { list-style: none; overflow-y: auto; flex: 1; padding: 8px; }
+.tree-item { display: flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 0.82rem; font-family: 'Fira Code', monospace; transition: background 0.15s; }
+.tree-item:hover { background: var(--bg-card-hover); }
+.tree-item.active { background: rgba(88,101,242,0.2); color: var(--primary); }
+.tree-icon { font-size: 0.9rem; flex-shrink: 0; }
+.tree-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.file-viewer { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden; }
+.viewer-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; color: var(--text-muted); font-size: 1.1rem; }
+.viewer-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid var(--border); flex-shrink: 0; flex-wrap: wrap; gap: 8px; }
+.viewer-meta { display: flex; flex-direction: column; gap: 2px; }
+.viewer-path { font-family: monospace; font-size: 0.9rem; font-weight: 600; color: var(--primary); }
+.viewer-stats { font-size: 0.75rem; color: var(--text-muted); }
+.viewer-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.code-container { display: flex; overflow: auto; flex: 1; }
+.line-numbers { user-select: none; padding: 16px 12px; background: var(--bg); color: var(--text-muted); font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.8rem; line-height: 1.6; text-align: right; border-right: 1px solid var(--border); min-width: 50px; white-space: pre; flex-shrink: 0; }
+.code-content { padding: 16px; font-family: 'Fira Code', 'Courier New', monospace; font-size: 0.82rem; line-height: 1.6; color: #e6edf3; white-space: pre; margin: 0; flex: 1; }
+
+@media (max-width: 900px) {
+    .file-browser { grid-template-columns: 1fr; height: auto; }
+    .file-tree { height: 200px; }
+    .file-viewer { min-height: 400px; }
+}
+</style>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}{{ guild.name }} — Logs{% endblock %}
+{% block content %}
+<body data-guild-id="{{ guild.id }}">
+<div class="page-header">
+    <div class="page-header-left">
+        <h1>📝 Logs Configuration</h1>
+        <p>{{ guild.name }}</p>
+    </div>
+    <a href="/dashboard/{{ guild.id }}" class="btn btn-outline">← Back</a>
+</div>
+<div class="section">
+    <div class="section-header">
+        <h2>Log Channels</h2>
+        <p>Run <code>/logs setup</code> in your server to automatically create all log channels. Run <code>/logs view</code> to see current configuration.</p>
+    </div>
+    <div class="module-grid">
+        {% for ch in ["member-logs","message-logs","moderation-logs","ticket-logs","application-logs","role-logs","channel-logs","voice-logs","server-logs"] %}
+        <div class="module-card">
+            <span class="module-icon">📋</span>
+            <h3>#{{ ch }}</h3>
+            <p>Tracks {{ ch.replace('-logs','').replace('-',' ') }} events</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

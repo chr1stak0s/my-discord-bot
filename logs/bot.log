@@ -1,0 +1,1928 @@
+2026-06-17 15:51:51 [INFO] bot: Startup validation passed
+2026-06-17 15:51:51 [INFO] bot: Running setup hook...
+2026-06-17 15:51:54 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<161 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 15:51:54 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<234 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 15:51:54 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 15:51:54 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 15:51:54 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 15:51:54 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 15:51:54 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 15:51:54 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 15:51:54 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 15:51:54 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 15:51:54 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 15:51:54 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 15:51:54 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 15:51:55 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 15:51:57 [INFO] bot: ==================================================
+2026-06-17 15:51:57 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 15:51:57 [INFO] bot: Guilds: 1
+2026-06-17 15:51:57 [INFO] bot: Users: 4
+2026-06-17 15:51:57 [INFO] bot: Latency: 151ms
+2026-06-17 15:51:57 [INFO] bot: ==================================================
+2026-06-17 15:51:57 [ERROR] bot: Unhandled error in on_ready
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\client.py"[0m, line [35m441[0m, in [35m_run_event[0m
+    await coro(*args, **kwargs)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\tickets.py"[0m, line [35m226[0m, in [35mon_ready[0m
+    [31mself.bot.add_view[0m[1;31m(TicketPanelView([[0m
+    [31m~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Support", "emoji": "🛠️"},[0m
+        [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Report", "emoji": "🚨"},
+    [0m    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Purchase", "emoji": "💰"},
+    [0m    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1;31m]))[0m
+    [1;31m^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\client.py"[0m, line [35m2711[0m, in [35madd_view[0m
+    raise ValueError('View is not persistent. Items need to have a custom_id set and View must have no timeout')
+[1;35mValueError[0m: [35mView is not persistent. Items need to have a custom_id set and View must have no timeout[0m
+2026-06-17 16:18:35 [INFO] bot: Startup validation passed
+2026-06-17 16:18:36 [INFO] bot: Running setup hook...
+2026-06-17 16:18:38 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<161 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 16:18:38 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<234 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 16:18:38 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 16:18:38 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 16:18:38 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 16:18:38 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 16:18:38 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 16:18:38 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 16:18:38 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 16:18:38 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 16:18:38 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 16:18:38 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 16:18:38 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 16:18:39 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 16:18:41 [INFO] bot: ==================================================
+2026-06-17 16:18:41 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 16:18:41 [INFO] bot: Guilds: 1
+2026-06-17 16:18:41 [INFO] bot: Users: 4
+2026-06-17 16:18:41 [INFO] bot: Latency: 167ms
+2026-06-17 16:18:41 [INFO] bot: ==================================================
+2026-06-17 16:18:41 [ERROR] bot: Unhandled error in on_ready
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\client.py"[0m, line [35m441[0m, in [35m_run_event[0m
+    await coro(*args, **kwargs)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\tickets.py"[0m, line [35m272[0m, in [35mon_ready[0m
+    [31mself.bot.add_view[0m[1;31m(TicketPanelView([[0m
+    [31m~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Support", "emoji": "🛠️"},[0m
+        [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Report", "emoji": "🚨"},
+    [0m    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Purchase", "emoji": "💰"},
+    [0m    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1;31m]))[0m
+    [1;31m^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\client.py"[0m, line [35m2711[0m, in [35madd_view[0m
+    raise ValueError('View is not persistent. Items need to have a custom_id set and View must have no timeout')
+[1;35mValueError[0m: [35mView is not persistent. Items need to have a custom_id set and View must have no timeout[0m
+2026-06-17 16:19:17 [INFO] bot: Startup validation passed
+2026-06-17 16:19:18 [INFO] bot: Running setup hook...
+2026-06-17 16:19:20 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<161 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 16:19:20 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<234 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 16:19:20 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 16:19:20 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 16:19:20 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 16:19:20 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 16:19:20 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 16:19:20 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 16:19:20 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 16:19:20 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 16:19:20 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 16:19:20 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 16:19:20 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 16:19:20 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 16:19:23 [INFO] bot: ==================================================
+2026-06-17 16:19:23 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 16:19:23 [INFO] bot: Guilds: 1
+2026-06-17 16:19:23 [INFO] bot: Users: 4
+2026-06-17 16:19:23 [INFO] bot: Latency: 157ms
+2026-06-17 16:19:23 [INFO] bot: ==================================================
+2026-06-17 16:19:23 [ERROR] bot: Unhandled error in on_ready
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\client.py"[0m, line [35m441[0m, in [35m_run_event[0m
+    await coro(*args, **kwargs)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\tickets.py"[0m, line [35m272[0m, in [35mon_ready[0m
+    [31mself.bot.add_view[0m[1;31m(TicketPanelView([[0m
+    [31m~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Support", "emoji": "🛠️"},[0m
+        [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Report", "emoji": "🚨"},
+    [0m    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Purchase", "emoji": "💰"},
+    [0m    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1;31m]))[0m
+    [1;31m^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\client.py"[0m, line [35m2711[0m, in [35madd_view[0m
+    raise ValueError('View is not persistent. Items need to have a custom_id set and View must have no timeout')
+[1;35mValueError[0m: [35mView is not persistent. Items need to have a custom_id set and View must have no timeout[0m
+2026-06-17 17:33:35 [INFO] bot: Startup validation passed
+2026-06-17 17:33:36 [INFO] bot: Running setup hook...
+2026-06-17 17:33:38 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<161 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 17:33:38 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<234 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 17:33:38 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 17:33:38 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 17:33:38 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 17:33:38 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 17:33:38 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 17:33:38 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 17:33:38 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 17:33:38 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 17:33:38 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 17:33:38 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 17:33:38 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 17:33:39 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 17:33:41 [INFO] bot: ==================================================
+2026-06-17 17:33:41 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 17:33:41 [INFO] bot: Guilds: 1
+2026-06-17 17:33:41 [INFO] bot: Users: 4
+2026-06-17 17:33:41 [INFO] bot: Latency: 155ms
+2026-06-17 17:33:41 [INFO] bot: ==================================================
+2026-06-17 17:33:41 [ERROR] bot: Unhandled error in on_ready
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\client.py"[0m, line [35m441[0m, in [35m_run_event[0m
+    await coro(*args, **kwargs)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\tickets.py"[0m, line [35m272[0m, in [35mon_ready[0m
+    [31mself.bot.add_view[0m[1;31m(TicketPanelView([[0m
+    [31m~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Support", "emoji": "🛠️"},[0m
+        [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Report", "emoji": "🚨"},
+    [0m    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+        [1;31m{"name": "Purchase", "emoji": "💰"},
+    [0m    [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1;31m]))[0m
+    [1;31m^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\client.py"[0m, line [35m2711[0m, in [35madd_view[0m
+    raise ValueError('View is not persistent. Items need to have a custom_id set and View must have no timeout')
+[1;35mValueError[0m: [35mView is not persistent. Items need to have a custom_id set and View must have no timeout[0m
+2026-06-17 19:27:57 [INFO] bot: Startup validation passed
+2026-06-17 19:27:58 [INFO] bot: Running setup hook...
+2026-06-17 19:28:00 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<161 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 19:28:00 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<234 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 19:28:00 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 19:28:00 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 19:28:00 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 19:28:00 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 19:28:00 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 19:28:00 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 19:28:00 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 19:28:00 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 19:28:00 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 19:28:00 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 19:28:00 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 19:28:01 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 19:28:04 [INFO] bot: ==================================================
+2026-06-17 19:28:04 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 19:28:04 [INFO] bot: Guilds: 1
+2026-06-17 19:28:04 [INFO] bot: Users: 4
+2026-06-17 19:28:04 [INFO] bot: Latency: 153ms
+2026-06-17 19:28:04 [INFO] bot: ==================================================
+2026-06-17 19:48:29 [INFO] bot: Startup validation passed
+2026-06-17 19:48:30 [INFO] bot: Running setup hook...
+2026-06-17 19:48:34 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<161 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 19:48:34 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<234 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1758[0m, in [35merror[0m
+    raise TypeError('The error handler must have 2 parameters.')
+[1;35mTypeError[0m: [35mThe error handler must have 2 parameters.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must have 2 parameters.[0m
+2026-06-17 19:48:34 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 19:48:34 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 19:48:34 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 19:48:34 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 19:48:34 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 19:48:34 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 19:48:34 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 19:48:34 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 19:48:34 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 19:48:34 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 19:48:34 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 19:48:35 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 19:48:37 [INFO] bot: ==================================================
+2026-06-17 19:48:37 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 19:48:37 [INFO] bot: Guilds: 1
+2026-06-17 19:48:37 [INFO] bot: Users: 4
+2026-06-17 19:48:37 [INFO] bot: Latency: 161ms
+2026-06-17 19:48:37 [INFO] bot: ==================================================
+2026-06-17 19:51:06 [INFO] bot: Startup validation passed
+2026-06-17 19:51:06 [INFO] bot: Running setup hook...
+2026-06-17 19:51:10 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 19:51:10 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 19:51:10 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 19:51:10 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 19:51:10 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 19:51:10 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 19:51:10 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 19:51:10 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 19:51:10 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 19:51:10 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 19:51:10 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 19:51:10 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 19:51:10 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 19:51:10 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 19:51:13 [INFO] bot: ==================================================
+2026-06-17 19:51:13 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 19:51:13 [INFO] bot: Guilds: 1
+2026-06-17 19:51:13 [INFO] bot: Users: 4
+2026-06-17 19:51:13 [INFO] bot: Latency: 155ms
+2026-06-17 19:51:13 [INFO] bot: ==================================================
+2026-06-17 19:54:25 [INFO] bot: Startup validation passed
+2026-06-17 19:54:25 [INFO] bot: Running setup hook...
+2026-06-17 19:54:27 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 19:54:27 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 19:54:27 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 19:54:27 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 19:54:27 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 19:54:27 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 19:54:27 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 19:54:27 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 19:54:27 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 19:54:27 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 19:54:27 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 19:54:27 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 19:54:27 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 19:54:28 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 19:54:30 [INFO] bot: ==================================================
+2026-06-17 19:54:30 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 19:54:30 [INFO] bot: Guilds: 1
+2026-06-17 19:54:30 [INFO] bot: Users: 4
+2026-06-17 19:54:30 [INFO] bot: Latency: 150ms
+2026-06-17 19:54:30 [INFO] bot: ==================================================
+2026-06-17 19:55:29 [INFO] bot: Shutting down bot...
+2026-06-17 19:55:29 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 19:55:34 [INFO] bot: Startup validation passed
+2026-06-17 19:55:35 [INFO] bot: Running setup hook...
+2026-06-17 19:55:37 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 19:55:37 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 19:55:37 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 19:55:37 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 19:55:37 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 19:55:37 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 19:55:37 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 19:55:37 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 19:55:37 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 19:55:37 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 19:55:37 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 19:55:37 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 19:55:37 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 19:55:37 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 19:55:40 [INFO] bot: ==================================================
+2026-06-17 19:55:40 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 19:55:40 [INFO] bot: Guilds: 1
+2026-06-17 19:55:40 [INFO] bot: Users: 4
+2026-06-17 19:55:40 [INFO] bot: Latency: 161ms
+2026-06-17 19:55:40 [INFO] bot: ==================================================
+2026-06-17 19:58:56 [INFO] bot: Shutting down bot...
+2026-06-17 19:58:56 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 19:58:59 [INFO] bot: Startup validation passed
+2026-06-17 19:58:59 [INFO] bot: Running setup hook...
+2026-06-17 19:59:01 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 19:59:01 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 19:59:01 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 19:59:01 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 19:59:01 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 19:59:01 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 19:59:01 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 19:59:01 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 19:59:01 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 19:59:01 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 19:59:01 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 19:59:01 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 19:59:01 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 19:59:02 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 19:59:04 [INFO] bot: ==================================================
+2026-06-17 19:59:04 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 19:59:04 [INFO] bot: Guilds: 1
+2026-06-17 19:59:04 [INFO] bot: Users: 4
+2026-06-17 19:59:04 [INFO] bot: Latency: 147ms
+2026-06-17 19:59:04 [INFO] bot: ==================================================
+2026-06-17 19:59:57 [INFO] bot: Shutting down bot...
+2026-06-17 19:59:57 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 19:59:59 [INFO] bot: Startup validation passed
+2026-06-17 20:00:02 [INFO] bot: Running setup hook...
+2026-06-17 20:00:04 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:00:04 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:00:04 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 20:00:04 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 20:00:04 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 20:00:04 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 20:00:04 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 20:00:04 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 20:00:04 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 20:00:04 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 20:00:04 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 20:00:04 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 20:00:04 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 20:00:04 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 20:00:07 [INFO] bot: ==================================================
+2026-06-17 20:00:07 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 20:00:07 [INFO] bot: Guilds: 1
+2026-06-17 20:00:07 [INFO] bot: Users: 4
+2026-06-17 20:00:07 [INFO] bot: Latency: 154ms
+2026-06-17 20:00:07 [INFO] bot: ==================================================
+2026-06-17 20:00:52 [INFO] bot: Shutting down bot...
+2026-06-17 20:00:52 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 20:01:28 [INFO] bot: Startup validation passed
+2026-06-17 20:01:29 [INFO] bot: Running setup hook...
+2026-06-17 20:01:31 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:01:31 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:01:31 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 20:01:31 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 20:01:31 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 20:01:31 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 20:01:31 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 20:01:31 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 20:01:31 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 20:01:31 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 20:01:31 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 20:01:31 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 20:01:31 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 20:01:31 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 20:01:34 [INFO] bot: ==================================================
+2026-06-17 20:01:34 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 20:01:34 [INFO] bot: Guilds: 1
+2026-06-17 20:01:34 [INFO] bot: Users: 4
+2026-06-17 20:01:34 [INFO] bot: Latency: 159ms
+2026-06-17 20:01:34 [INFO] bot: ==================================================
+2026-06-17 20:01:47 [INFO] bot: Shutting down bot...
+2026-06-17 20:01:47 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 20:01:49 [INFO] bot: Startup validation passed
+2026-06-17 20:01:50 [INFO] bot: Running setup hook...
+2026-06-17 20:01:51 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:01:51 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:01:51 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 20:01:51 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 20:01:51 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 20:01:51 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 20:01:51 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 20:01:51 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 20:01:51 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 20:01:51 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 20:01:51 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 20:01:51 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 20:01:51 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 20:02:02 [INFO] bot: Shutting down bot...
+2026-06-17 20:02:02 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 20:02:08 [INFO] bot: Startup validation passed
+2026-06-17 20:02:08 [INFO] bot: Running setup hook...
+2026-06-17 20:02:10 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:02:10 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:02:10 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 20:02:10 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 20:02:10 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 20:02:10 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 20:02:10 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 20:02:10 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 20:02:10 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 20:02:10 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 20:02:10 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 20:02:10 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 20:02:10 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 20:03:01 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 20:03:04 [INFO] bot: ==================================================
+2026-06-17 20:03:04 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 20:03:04 [INFO] bot: Guilds: 1
+2026-06-17 20:03:04 [INFO] bot: Users: 4
+2026-06-17 20:03:04 [INFO] bot: Latency: 147ms
+2026-06-17 20:03:04 [INFO] bot: ==================================================
+2026-06-17 20:18:24 [INFO] bot: Shutting down bot...
+2026-06-17 20:18:24 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 20:18:36 [INFO] bot: Startup validation passed
+2026-06-17 20:18:36 [INFO] bot: Running setup hook...
+2026-06-17 20:18:38 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:18:38 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:18:38 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 20:18:38 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 20:18:38 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 20:18:38 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 20:18:38 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 20:18:38 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 20:18:38 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 20:18:38 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 20:18:38 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 20:18:38 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 20:18:38 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 20:18:39 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 20:18:41 [INFO] bot: ==================================================
+2026-06-17 20:18:41 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 20:18:41 [INFO] bot: Guilds: 1
+2026-06-17 20:18:41 [INFO] bot: Users: 4
+2026-06-17 20:18:41 [INFO] bot: Latency: 166ms
+2026-06-17 20:18:41 [INFO] bot: ==================================================
+2026-06-17 20:19:14 [INFO] bot: Shutting down bot...
+2026-06-17 20:19:14 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 20:19:16 [INFO] bot: Startup validation passed
+2026-06-17 20:19:17 [INFO] bot: Running setup hook...
+2026-06-17 20:19:19 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:19:19 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:19:19 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 20:19:19 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 20:19:19 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 20:19:19 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 20:19:19 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 20:19:19 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 20:19:19 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 20:19:19 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 20:19:19 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 20:19:19 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 20:19:19 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 20:19:19 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 20:19:22 [INFO] bot: ==================================================
+2026-06-17 20:19:22 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 20:19:22 [INFO] bot: Guilds: 1
+2026-06-17 20:19:22 [INFO] bot: Users: 4
+2026-06-17 20:19:22 [INFO] bot: Latency: 157ms
+2026-06-17 20:19:22 [INFO] bot: ==================================================
+2026-06-17 20:19:49 [INFO] bot: Shutting down bot...
+2026-06-17 20:19:49 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 20:19:57 [INFO] bot: Startup validation passed
+2026-06-17 20:19:58 [INFO] bot: Running setup hook...
+2026-06-17 20:20:00 [ERROR] bot: Failed to load extension cogs.admin: Extension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Admin(commands.Cog):
+    ...<162 lines>...
+                await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\admin.py"[0m, line [35m165[0m, in [35mAdmin[0m
+    @[1;31madmin_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.admin' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:20:00 [ERROR] bot: Failed to load extension cogs.moderation: Extension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m12[0m, in [35m<module>[0m
+    class Moderation(commands.Cog):
+    ...<235 lines>...
+                    await interaction.response.send_message(embed=error_embed("Error", str(error)), ephemeral=True)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\moderation.py"[0m, line [35m239[0m, in [35mModeration[0m
+    @[1;31mmod_group.error[0m
+     [1;31m^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\app_commands\commands.py"[0m, line [35m1754[0m, in [35merror[0m
+    raise TypeError('The error handler must be a coroutine.')
+[1;35mTypeError[0m: [35mThe error handler must be a coroutine.[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.moderation' raised an error: TypeError: The error handler must be a coroutine.[0m
+2026-06-17 20:20:00 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 20:20:00 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 20:20:00 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 20:20:00 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 20:20:00 [ERROR] bot: Failed to load extension cogs.utility: Extension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m935[0m, in [35m_load_from_module_spec[0m
+    [31mspec.loader.exec_module[0m[1;31m(lib)[0m  # type: ignore
+    [31m~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"<frozen importlib._bootstrap_external>"[0m, line [35m759[0m, in [35mexec_module[0m
+  File [35m"<frozen importlib._bootstrap>"[0m, line [35m491[0m, in [35m_call_with_frames_removed[0m
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\utility.py"[0m, line [35m6[0m, in [35m<module>[0m
+    import psutil
+[1;35mModuleNotFoundError[0m: [35mNo module named 'psutil'[0m
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\main.py"[0m, line [35m60[0m, in [35msetup_hook[0m
+    await self.load_extension(ext)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m1013[0m, in [35mload_extension[0m
+    await self._load_from_module_spec(spec, name)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\ext\commands\bot.py"[0m, line [35m938[0m, in [35m_load_from_module_spec[0m
+    raise errors.ExtensionFailed(key, e) from e
+[1;35mdiscord.ext.commands.errors.ExtensionFailed[0m: [35mExtension 'cogs.utility' raised an error: ModuleNotFoundError: No module named 'psutil'[0m
+2026-06-17 20:20:00 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 20:20:00 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 20:20:00 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 20:20:00 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 20:20:00 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 20:20:00 [WARNING] bot: Failed to load 3 extension(s): cogs.admin, cogs.moderation, cogs.utility
+2026-06-17 20:20:00 [INFO] bot: Synced 18 application command(s) globally
+2026-06-17 20:20:03 [INFO] bot: ==================================================
+2026-06-17 20:20:03 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 20:20:03 [INFO] bot: Guilds: 1
+2026-06-17 20:20:03 [INFO] bot: Users: 4
+2026-06-17 20:20:03 [INFO] bot: Latency: 153ms
+2026-06-17 20:20:03 [INFO] bot: ==================================================
+2026-06-17 20:32:25 [INFO] bot: Shutting down bot...
+2026-06-17 20:32:25 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 20:32:27 [INFO] bot: Startup validation passed
+2026-06-17 20:32:28 [INFO] bot: Running setup hook...
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.admin
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.moderation
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.utility
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 20:32:30 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 20:32:30 [INFO] bot: Synced 21 application command(s) globally
+2026-06-17 20:32:33 [INFO] bot: ==================================================
+2026-06-17 20:32:33 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 20:32:33 [INFO] bot: Guilds: 1
+2026-06-17 20:32:33 [INFO] bot: Users: 4
+2026-06-17 20:32:33 [INFO] bot: Latency: 154ms
+2026-06-17 20:32:33 [INFO] bot: ==================================================
+2026-06-17 20:32:51 [ERROR] bot: Unhandled error in on_guild_channel_delete
+Traceback (most recent call last):
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\client.py"[0m, line [35m441[0m, in [35m_run_event[0m
+    await coro(*args, **kwargs)
+  File [35m"C:\Users\barou\Documents\replit-bot-python\bot\cogs\logs.py"[0m, line [35m230[0m, in [35mon_guild_channel_delete[0m
+    await log_ch.send(embed=embed)
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\abc.py"[0m, line [35m1561[0m, in [35msend[0m
+    data = [1;31mawait state.http.send_message(channel.id, params=params)[0m
+           [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"C:\Users\barou\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\discord\http.py"[0m, line [35m741[0m, in [35mrequest[0m
+    raise NotFound(response, data)
+[1;35mdiscord.errors.NotFound[0m: [35m404 Not Found (error code: 10003): Unknown Channel[0m
+2026-06-17 20:37:45 [INFO] bot: Shutting down bot...
+2026-06-17 20:37:45 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-17 20:38:01 [INFO] bot: Startup validation passed
+2026-06-17 20:38:02 [INFO] bot: Running setup hook...
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.admin
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.moderation
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.utility
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 20:38:04 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 20:38:04 [INFO] bot: Synced 21 application command(s) globally
+2026-06-17 20:38:07 [INFO] bot: ==================================================
+2026-06-17 20:38:07 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 20:38:07 [INFO] bot: Guilds: 1
+2026-06-17 20:38:07 [INFO] bot: Users: 4
+2026-06-17 20:38:07 [INFO] bot: Latency: 155ms
+2026-06-17 20:38:07 [INFO] bot: ==================================================
+2026-06-17 21:22:06 [INFO] bot: Startup validation passed
+2026-06-17 21:22:07 [INFO] bot: Running setup hook...
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.admin
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.moderation
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.applications
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.logs
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.utility
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.automod
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.economy
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.extra
+2026-06-17 21:22:09 [INFO] bot: Loaded extension: cogs.help
+2026-06-17 21:22:09 [INFO] bot: Synced 21 application command(s) globally
+2026-06-17 21:22:12 [INFO] bot: ==================================================
+2026-06-17 21:22:12 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-17 21:22:12 [INFO] bot: Guilds: 1
+2026-06-17 21:22:12 [INFO] bot: Users: 4
+2026-06-17 21:22:12 [INFO] bot: Latency: 151ms
+2026-06-17 21:22:12 [INFO] bot: ==================================================
+2026-06-18 16:35:34 [INFO] bot: Startup validation passed
+2026-06-18 16:35:34 [INFO] bot: Running setup hook...
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.admin
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.moderation
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.applications
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.logs
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.utility
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.automod
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.economy
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.extra
+2026-06-18 16:35:37 [INFO] bot: Loaded extension: cogs.help
+2026-06-18 16:35:37 [INFO] bot: Synced 21 application command(s) globally
+2026-06-18 16:35:40 [INFO] bot: ==================================================
+2026-06-18 16:35:40 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-18 16:35:40 [INFO] bot: Guilds: 1
+2026-06-18 16:35:40 [INFO] bot: Users: 4
+2026-06-18 16:35:40 [INFO] bot: Latency: 162ms
+2026-06-18 16:35:40 [INFO] bot: ==================================================
+2026-06-18 16:57:24 [INFO] bot: Startup validation passed
+2026-06-18 16:57:25 [INFO] bot: Running setup hook...
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.admin
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.moderation
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.applications
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.logs
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.utility
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.automod
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.economy
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.extra
+2026-06-18 16:57:27 [INFO] bot: Loaded extension: cogs.help
+2026-06-18 16:57:30 [INFO] bot: Synced 21 application command(s) globally
+2026-06-18 16:57:33 [INFO] bot: ==================================================
+2026-06-18 16:57:33 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-18 16:57:33 [INFO] bot: Guilds: 1
+2026-06-18 16:57:33 [INFO] bot: Users: 4
+2026-06-18 16:57:33 [INFO] bot: Latency: 154ms
+2026-06-18 16:57:33 [INFO] bot: ==================================================
+2026-06-18 17:25:01 [INFO] bot: Startup validation passed
+2026-06-18 17:25:01 [INFO] bot: Running setup hook...
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.admin
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.moderation
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.applications
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.logs
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.utility
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.automod
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.economy
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.extra
+2026-06-18 17:25:03 [INFO] bot: Loaded extension: cogs.help
+2026-06-18 17:25:04 [INFO] bot: Synced 21 application command(s) globally
+2026-06-18 17:25:06 [INFO] bot: ==================================================
+2026-06-18 17:25:06 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-18 17:25:06 [INFO] bot: Guilds: 1
+2026-06-18 17:25:06 [INFO] bot: Users: 4
+2026-06-18 17:25:06 [INFO] bot: Latency: 155ms
+2026-06-18 17:25:06 [INFO] bot: ==================================================
+2026-06-18 19:13:01 [INFO] bot: Startup validation passed
+2026-06-18 19:13:02 [INFO] bot: Running setup hook...
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.admin
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.moderation
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.applications
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.logs
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.utility
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.automod
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.economy
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.extra
+2026-06-18 19:13:04 [INFO] bot: Loaded extension: cogs.help
+2026-06-18 19:13:04 [INFO] bot: Synced 21 application command(s) globally
+2026-06-18 19:13:07 [INFO] bot: ==================================================
+2026-06-18 19:13:07 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-18 19:13:07 [INFO] bot: Guilds: 1
+2026-06-18 19:13:07 [INFO] bot: Users: 4
+2026-06-18 19:13:07 [INFO] bot: Latency: 152ms
+2026-06-18 19:13:07 [INFO] bot: ==================================================
+2026-06-18 19:21:30 [INFO] bot: Shutting down bot...
+2026-06-18 19:21:30 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-18 19:22:13 [INFO] bot: Startup validation passed
+2026-06-18 19:22:16 [INFO] bot: Running setup hook...
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.admin
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.moderation
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.applications
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.logs
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.utility
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.automod
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.economy
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.extra
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.help
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.voicechannels
+2026-06-18 19:22:18 [INFO] bot: Loaded extension: cogs.dm
+2026-06-18 19:22:19 [INFO] bot: Synced 24 application command(s) globally
+2026-06-18 19:22:22 [INFO] bot: ==================================================
+2026-06-18 19:22:22 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-18 19:22:22 [INFO] bot: Guilds: 1
+2026-06-18 19:22:22 [INFO] bot: Users: 4
+2026-06-18 19:22:22 [INFO] bot: Latency: 155ms
+2026-06-18 19:22:22 [INFO] bot: ==================================================
+2026-06-18 19:36:28 [INFO] bot: Shutting down bot...
+2026-06-18 19:36:28 [INFO] bot: Bot stopped by user (KeyboardInterrupt)
+2026-06-18 19:36:58 [INFO] bot: Startup validation passed
+2026-06-18 19:36:59 [INFO] bot: Running setup hook...
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.admin
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.moderation
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.tickets
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.applications
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.logs
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.embeds
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.utility
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.automod
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.welcome
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.economy
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.extra
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.help
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.voicechannels
+2026-06-18 19:37:01 [INFO] bot: Loaded extension: cogs.dm
+2026-06-18 19:37:01 [INFO] bot: Synced 24 application command(s) globally
+2026-06-18 19:37:04 [INFO] bot: ==================================================
+2026-06-18 19:37:04 [INFO] bot: Bot ready: Heg#7413 (1516129595332755567)
+2026-06-18 19:37:04 [INFO] bot: Guilds: 1
+2026-06-18 19:37:04 [INFO] bot: Users: 4
+2026-06-18 19:37:04 [INFO] bot: Latency: 151ms
+2026-06-18 19:37:04 [INFO] bot: ==================================================

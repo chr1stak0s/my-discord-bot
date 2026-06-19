@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}{{ guild.name }} — Applications{% endblock %}
+{% block content %}
+<body data-guild-id="{{ guild.id }}">
+<div class="page-header">
+    <div class="page-header-left">
+        <h1>📋 Application Management</h1>
+        <p>{{ guild.name }}</p>
+    </div>
+    <a href="/dashboard/{{ guild.id }}" class="btn btn-outline">← Back</a>
+</div>
+<div class="section">
+    <div class="section-header">
+        <h2>Application Commands</h2>
+        <p>Manage application forms directly from Discord using slash commands.</p>
+    </div>
+    <div class="module-grid">
+        <div class="module-card"><span class="module-icon">⚙️</span><h3>/applications setup</h3><p>Configure review channel and reviewer roles</p></div>
+        <div class="module-card"><span class="module-icon">➕</span><h3>/applications create</h3><p>Create a new application form with questions</p></div>
+        <div class="module-card"><span class="module-icon">✏️</span><h3>/applications edit</h3><p>Edit an existing form's questions</p></div>
+        <div class="module-card"><span class="module-icon">📤</span><h3>/applications panel</h3><p>Send an application panel to a channel</p></div>
+        <div class="module-card"><span class="module-icon">✅</span><h3>/applications accept</h3><p>Accept a pending application</p></div>
+        <div class="module-card"><span class="module-icon">❌</span><h3>/applications deny</h3><p>Deny a pending application</p></div>
+        <div class="module-card"><span class="module-icon">🔓</span><h3>/applications open</h3><p>Open applications for a form</p></div>
+        <div class="module-card"><span class="module-icon">🔒</span><h3>/applications close</h3><p>Close applications for a form</p></div>
+        <div class="module-card"><span class="module-icon">📊</span><h3>/applications view</h3><p>View application statistics</p></div>
+    </div>
+</div>
+{% endblock %}

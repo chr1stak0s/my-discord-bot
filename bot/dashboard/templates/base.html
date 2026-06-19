@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bot Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% if session.user %}
+    <nav class="navbar">
+        <div class="nav-brand">
+            <span class="nav-logo">⚡</span>
+            <span class="nav-title">Bot Dashboard</span>
+        </div>
+        <div class="nav-links">
+            <a href="/dashboard" class="nav-link">Servers</a>
+        </div>
+        <div class="nav-user">
+            <img class="avatar" src="https://cdn.discordapp.com/avatars/{{ session.user.id }}/{{ session.user.avatar }}.png?size=64" alt="avatar" onerror="this.src='https://cdn.discordapp.com/embed/avatars/0.png'">
+            <span>{{ session.user.username }}</span>
+            <a href="/logout" class="btn btn-sm btn-outline">Logout</a>
+        </div>
+    </nav>
+    {% endif %}
+
+    <main class="main-content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+          {% endfor %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html>

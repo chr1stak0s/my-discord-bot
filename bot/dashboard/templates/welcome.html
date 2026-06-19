@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{ guild.name }} — Welcome System{% endblock %}
+{% block content %}
+<body data-guild-id="{{ guild.id }}">
+<div class="page-header">
+    <div class="page-header-left">
+        <h1>👋 Welcome System</h1>
+        <p>{{ guild.name }}</p>
+    </div>
+    <a href="/dashboard/{{ guild.id }}" class="btn btn-outline">← Back</a>
+</div>
+<div class="section">
+    <div class="section-header">
+        <h2>Welcome Settings</h2>
+        <p>Configure welcome and leave messages via Discord slash commands: <code>/welcome setup</code></p>
+    </div>
+    <form id="welcome-form" data-config-form>
+        <div class="form-group">
+            <label class="form-label">Welcome Message</label>
+            <input class="form-input" type="text" name="welcome_message" placeholder="Use {user}, {server}, {count}">
+        </div>
+        <div class="form-group">
+            <label class="form-label">Leave Message</label>
+            <input class="form-input" type="text" name="leave_message" placeholder="Use {user}, {server}, {count}">
+        </div>
+        <div class="form-group">
+            <label class="form-check">
+                <input type="checkbox" name="dm_welcome">
+                <span>Send DM on join</span>
+            </label>
+        </div>
+        <button type="button" class="btn btn-primary" data-save-config="welcome-form">Save Settings</button>
+    </form>
+</div>
+{% endblock %}

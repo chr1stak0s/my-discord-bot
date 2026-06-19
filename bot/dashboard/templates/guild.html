@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}{{ guild.name }} — Dashboard{% endblock %}
+{% block content %}
+<div class="page-header">
+    <div class="page-header-left">
+        {% if guild.icon %}
+        <img class="guild-icon-sm" src="https://cdn.discordapp.com/icons/{{ guild.id }}/{{ guild.icon }}.png?size=64" alt="{{ guild.name }}">
+        {% endif %}
+        <div>
+            <h1>{{ guild.name }}</h1>
+            <p>{{ guild_info.get('approximate_member_count', '?') }} members</p>
+        </div>
+    </div>
+    <a href="/dashboard" class="btn btn-outline">← All Servers</a>
+</div>
+
+<div id="stats-grid" class="stats-grid">
+    <div class="stat-card loading"><div class="stat-value" id="stat-tickets-total">—</div><div class="stat-label">Total Tickets</div></div>
+    <div class="stat-card loading"><div class="stat-value" id="stat-tickets-open">—</div><div class="stat-label">Open Tickets</div></div>
+    <div class="stat-card loading"><div class="stat-value" id="stat-applications">—</div><div class="stat-label">Applications</div></div>
+    <div class="stat-card loading"><div class="stat-value" id="stat-warnings">—</div><div class="stat-label">Warnings Issued</div></div>
+    <div class="stat-card loading"><div class="stat-value" id="stat-economy">—</div><div class="stat-label">Economy Users</div></div>
+    <div class="stat-card loading"><div class="stat-value" id="stat-leveling">—</div><div class="stat-label">Leveling Users</div></div>
+</div>
+
+<div class="module-grid">
+    <a href="/dashboard/{{ guild.id }}/tickets" class="module-card">
+        <span class="module-icon">🎫</span>
+        <h3>Tickets</h3>
+        <p>Manage ticket system, view open tickets, and transcripts</p>
+    </a>
+    <a href="/dashboard/{{ guild.id }}/moderation" class="module-card">
+        <span class="module-icon">🔨</span>
+        <h3>Moderation</h3>
+        <p>View warnings, bans, and moderation history</p>
+    </a>
+    <a href="/dashboard/{{ guild.id }}/applications" class="module-card">
+        <span class="module-icon">📋</span>
+        <h3>Applications</h3>
+        <p>Review and manage application forms and submissions</p>
+    </a>
+    <a href="/dashboard/{{ guild.id }}/logs" class="module-card">
+        <span class="module-icon">📝</span>
+        <h3>Logs</h3>
+        <p>Configure logging channels and view log settings</p>
+    </a>
+    <a href="/dashboard/{{ guild.id }}/embeds" class="module-card">
+        <span class="module-icon">🎨</span>
+        <h3>Embed Builder</h3>
+        <p>Create and manage embed templates</p>
+    </a>
+    <a href="/dashboard/{{ guild.id }}/welcome" class="module-card">
+        <span class="module-icon">👋</span>
+        <h3>Welcome System</h3>
+        <p>Configure welcome and leave messages</p>
+    </a>
+    <a href="/dashboard/{{ guild.id }}/automod" class="module-card">
+        <span class="module-icon">🛡️</span>
+        <h3>AutoMod</h3>
+        <p>Configure automated moderation rules</p>
+    </a>
+</div>
+
+<script>
+const GUILD_ID = "{{ guild.id }}";
+fetch(`/api/${GUILD_ID}/stats`).then(r => r.json()).then(data => {
+    document.getElementById("stat-tickets-total").textContent = data.tickets?.total ?? 0;
+    document.getElementById("stat-tickets-open").textContent = data.tickets?.open ?? 0;
+    document.getElementById("stat-applications").textContent = data.applications?.total ?? 0;
+    document.getElementById("stat-warnings").textContent = data.warnings ?? 0;
+    document.getElementById("stat-economy").textContent = data.economy_users ?? 0;
+    document.getElementById("stat-leveling").textContent = data.leveling_users ?? 0;
+    document.querySelectorAll(".stat-card").forEach(c => c.classList.remove("loading"));
+}).catch(() => {
+    document.querySelectorAll(".stat-value").forEach(el => el.textContent = "?");
+    document.querySelectorAll(".stat-card").forEach(c => c.classList.remove("loading"));
+});
+</script>
+{% endblock %}
