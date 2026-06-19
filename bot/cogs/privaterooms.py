@@ -66,6 +66,7 @@ class PrivateRooms(commands.Cog):
         hub_channel="Voice channel users join to create a private room",
         category="Category where rooms are created (defaults to hub's category)",
         name_pattern="Room name pattern — variables: {username} {count}",
+        allowed_role="Role that automatically gets access to every room created from this hub",
     )
     @is_admin()
     async def setup(
@@ -74,6 +75,7 @@ class PrivateRooms(commands.Cog):
         hub_channel: discord.VoiceChannel,
         category: discord.CategoryChannel = None,
         name_pattern: str = "🔒 {username}'s Room",
+        allowed_role: discord.Role = None,
     ):
         await interaction.response.defer(ephemeral=True)
         cfg = await get_guild_config(interaction.guild_id)
@@ -83,6 +85,7 @@ class PrivateRooms(commands.Cog):
             "hub_channel_id": hub_channel.id,
             "category_id": category.id if category else None,
             "name_pattern": name_pattern,
+            "allowed_role_id": allowed_role.id if allowed_role else None,
         }
 
         updated = False
@@ -104,13 +107,18 @@ class PrivateRooms(commands.Cog):
         embed.add_field(name="Category", value=category.mention if category else "Hub's category", inline=True)
         embed.add_field(name="Name Pattern", value=f"`{name_pattern}`", inline=False)
         embed.add_field(name="Variables", value="`{username}` — display name\n`{count}` — room number", inline=False)
+        role_value = allowed_role.mention if allowed_role else "None — rooms are fully private"
+        embed.add_field(name="Auto-Access Role", value=role_value, inline=False)
         embed.add_field(
             name="How it works",
             value=(
                 "When a user joins this hub, the bot creates a voice channel that is:\n"
                 "• **Hidden** from everyone\n"
                 "• **Locked** — no one else can join\n"
-                "• Only the owner can grant access via `/room addrole` and `/room addmember`"
+                f"• **{allowed_role.name}** automatically gets access" if allowed_role else
+                "• **Hidden** from everyone\n"
+                "• **Locked** — no one else can join\n"
+                "• Only the owner can grant access via `/room addrole`"
             ),
             inline=False,
         )
@@ -156,14 +164,17 @@ class PrivateRooms(commands.Cog):
         for i, h in enumerate(hubs, 1):
             ch = interaction.guild.get_channel(h.get("hub_channel_id"))
             cat = interaction.guild.get_channel(h.get("category_id"))
+            role = interaction.guild.get_role(h.get("allowed_role_id")) if h.get("allowed_role_id") else None
             cat_str = cat.mention if cat else "Hub's category"
             pattern_str = h.get("name_pattern", default_pattern)
+            role_str = role.mention if role else "None"
             embed.add_field(
                 name=f"Hub {i} — {ch.name if ch else 'Deleted Channel'}",
                 value=(
                     f"**Channel:** {ch.mention if ch else '❌ Not found'}\n"
                     f"**Category:** {cat_str}\n"
-                    f"**Pattern:** `{pattern_str}`"
+                     f"**Pattern:** `{pattern_str}`\n"
+                    f"**Auto-Access Role:** {role_str}"
                 ),
                 inline=False,
             )
@@ -331,8 +342,9 @@ class PrivateRooms(commands.Cog):
             ephemeral=True,
         )
 
-    @room_group.command(name="addmember", description="Add a specific member to your private room")
+    @room_group.command(name="addmember", description="Add a specific member to a private room (admin only)")
     @app_commands.describe(member="The member to grant access to")
+    @is_admin()
     async def addmember(self, interaction: discord.Interaction, member: discord.Member):
         doc, channel = await self._get_owned_room(interaction)
         if not doc:
@@ -512,12 +524,17 @@ class PrivateRooms(commands.Cog):
             category_id = hub_cfg.get("category_id")
             category = guild.get_channel(category_id) if category_id else after.channel.category
 
-            # Everyone is denied; only the owner and bot can see/join
+              # Everyone is denied; owner, bot, and optional allowed_role can see/join
             overwrites = {
                 guild.default_role: discord.PermissionOverwrite(view_channel=False, connect=False),
                 member: discord.PermissionOverwrite(view_channel=True, connect=True),
                 guild.me: discord.PermissionOverwrite(view_channel=True, connect=True, manage_channels=True),
             }
+            allowed_role_id = hub_cfg.get("allowed_role_id")
+            if allowed_role_id:
+                allowed_role = guild.get_role(allowed_role_id)
+                if allowed_role:
+                    overwrites[allowed_role] = discord.PermissionOverwrite(view_channel=True, connect=True)
 
             try:
                 new_room = await guild.create_voice_channel(
