@@ -2,4 +2,4 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "pip install -r bot/bot/requirements.txt && python bot/bot/main.py"
+startCommand = "pip install -r requirements.txt && python bot/main.py"
