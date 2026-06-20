@@ -151,7 +151,10 @@ class ApplicationFormButton(discord.ui.Button):
 class ApplicationPanelView(discord.ui.View):
     def __init__(self, forms: list[dict]):
         super().__init__(timeout=None)
-        self.add_item(ApplicationSelect(forms))
+           for i, form in 
+            enumerate(forms[:25]):
+            self.add_item(ApplicationFormButton(form, row=i // 5))
+
 
 
 class ApplicationReviewView(discord.ui.View):
