@@ -607,3 +607,100 @@ class VerifyPanelCustomizerView(discord.ui.View):
         from database import update_guild_config
         await update_guild_config(interaction.guild_id, {"verify_panel": self.data})
         await interaction.response.send_message(embed=success_embed("Saved!", "Verification panel design saved."), ephemeral=True)
+
+# ─── Welcome / Leave Embed Customizer ─────────────────────────────────────────
+class WelcomeCustomizerView(discord.ui.View):
+    def __init__(self, user_id: int, kind: str, data: dict):
+        super().__init__(timeout=300)
+        self.user_id = user_id
+        self.kind = kind  # "welcome" or "leave"
+        self.data = data
+    async def _check(self, interaction: discord.Interaction) -> bool:
+        if interaction.user.id != self.user_id:
+            await interaction.response.send_message("This customizer belongs to someone else.", ephemeral=True)
+            return False
+        return True
+    def _label(self) -> str:
+        return "👋 Join Embed" if self.kind == "welcome" else "👋 Leave Embed"
+    def _summary(self) -> str:
+        lines = [
+            f"**Title:** {self.data.get('title') or ('*👋 Welcome, {user}!*' if self.kind == 'welcome' else '*👋 Member Left*')}",
+            f"**Description:** {(self.data.get('description') or '')[:80] or '*Default message*'}",
+            f"**Color:** #{self.data.get('color', 0x5865F2):06X}" if isinstance(self.data.get('color'), int) else f"**Color:** {self.data.get('color', '#5865F2')}",
+            f"**Thumbnail:** {'✅' if self.data.get('thumbnail') else '❌ (uses member avatar)'}",
+            f"**Image:** {'✅' if self.data.get('image') else '❌'}",
+            f"**Footer:** {self.data.get('footer_text') or '*Not set*'}",
+        ]
+        return "\n".join(lines)
+    async def _refresh(self, interaction: discord.Interaction):
+        embed = primary_embed(self._label() + " Customizer", self._summary())
+        embed.set_footer(text="Variables: {user} {server} {count} • Use Preview to test")
+        await interaction.edit_original_response(embed=embed, view=self)
+    @discord.ui.button(label="✏️ Title & Description", style=discord.ButtonStyle.primary, row=0)
+    async def set_title(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not await self._check(interaction): return
+        modal = TitleDescModal(self.data)
+        await interaction.response.send_modal(modal)
+        await modal.wait()
+        if modal.result:
+            self.data.update(modal.result)
+            await self._refresh(interaction)
+    @discord.ui.button(label="🎨 Color", style=discord.ButtonStyle.primary, row=0)
+    async def set_color(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not await self._check(interaction): return
+        modal = ColorModal(self.data)
+        await interaction.response.send_modal(modal)
+        await modal.wait()
+        if modal.result:
+            self.data.update(modal.result)
+            await self._refresh(interaction)
+    @discord.ui.button(label="🖼️ Images", style=discord.ButtonStyle.primary, row=0)
+    async def set_images(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not await self._check(interaction): return
+        modal = MediaModal(self.data)
+        await interaction.response.send_modal(modal)
+        await modal.wait()
+        if modal.result:
+            self.data.update(modal.result)
+            await self._refresh(interaction)
+    @discord.ui.button(label="📝 Footer", style=discord.ButtonStyle.primary, row=0)
+    async def set_footer(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not await self._check(interaction): return
+        modal = FooterModal(self.data)
+        await interaction.response.send_modal(modal)
+        await modal.wait()
+        if modal.result:
+            self.data.update(modal.result)
+            await self._refresh(interaction)
+    @discord.ui.button(label="👁️ Preview", style=discord.ButtonStyle.secondary, row=1)
+    async def preview(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not await self._check(interaction): return
+        member = interaction.user
+        data = dict(self.data)
+        default_title = "👋 Welcome, {user}!" if self.kind == "welcome" else "👋 Member Left"
+        title = (data.get("title") or default_title).replace("{user}", member.display_name).replace("{server}", interaction.guild.name).replace("{count}", str(interaction.guild.member_count))
+        desc = (data.get("description") or "").replace("{user}", member.mention).replace("{server}", interaction.guild.name).replace("{count}", str(interaction.guild.member_count))
+        data["title"] = title
+        data["description"] = desc
+        embed = build_panel_embed(data)
+        if not data.get("thumbnail"):
+            embed.set_thumbnail(url=member.display_avatar.url)
+        await interaction.response.send_message(embed=embed, ephemeral=True)
+    @discord.ui.button(label="💾 Save", style=discord.ButtonStyle.success, row=1)
+    async def save(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not await self._check(interaction): return
+        from database import update_guild_config
+        key = f"{self.kind}_embed"
+        await update_guild_config(interaction.guild_id, {key: self.data})
+        await interaction.response.send_message(
+            embed=success_embed("Saved!", f"{'Join' if self.kind == 'welcome' else 'Leave'} embed saved. It will be used for all future messages."),
+            ephemeral=True,
+        )
+    @discord.ui.button(label="🔄 Reset to Default", style=discord.ButtonStyle.danger, row=1)
+    async def reset(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not await self._check(interaction): return
+        from database import update_guild_config
+        key = f"{self.kind}_embed"
+        self.data = {}
+        await update_guild_config(interaction.guild_id, {key: {}})
+        await self._refresh(interaction)
