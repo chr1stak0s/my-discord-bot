@@ -121,9 +121,9 @@ class Applications(commands.Cog):
         await interaction.followup.send(embed=success_embed("Form Updated", f"Form **{name}** updated with {len(questions)} questions."), ephemeral=True)
 
     @app_group.command(name="panel", description="Send an application panel to a channel")
-    app_commands.describe(channel="Channel to send the panel to")
+    @app_commands.describe(channel="Channel to send the panel to")
     @is_admin()
-    async def panel(self, interaction:
+    async def panel(self, interaction: discord.Interaction, channel: discord.TextChannel):
         await interaction.response.defer(ephemeral=True)
         cfg = await get_guild_config(interaction.guild_id)
         forms = cfg.get("application_forms", [])
