@@ -36,6 +36,7 @@ EXTENSIONS = [
     "cogs.voicechannels",
     "cogs.dm",
     "cogs.privaterooms",
+    "cogs.serverstats",
 ]
 
 
