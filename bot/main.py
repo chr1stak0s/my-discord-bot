@@ -58,7 +58,9 @@ class DiscordBot(commands.Bot):
 
         # Register persistent views so button interactions survive restarts
         from views.vc_panel import VCPanelView
+        from views.applications import ApplicationPanelView
         self.add_view(VCPanelView())
+        self.add_view(ApplicationPanelView([]))
 
         # Load extensions
         failed = []

@@ -138,18 +138,20 @@ class Applications(commands.Cog):
 
         from views.applications import ApplicationPanelView, ApplicationDropdownPanelView
         if style == "buttons":
-            separator = "─" * 22
+            visible_forms = forms[:5]
+            separator = "─" * 28
             lines = []
-            for form in forms:
+            for form in visible_forms:
                 emoji = form.get("emoji", "📋")
-                lines.append(f"{emoji} **{form['name'].upper()}**")
+                lines.append(f"{emoji}  **{form['name'].upper()}**")
                 lines.append(separator)
+                lines.append("")
             lines.append("-# Πατήστε το αντίστοιχο κουμπί για να υποβάλετε αίτηση.")
             embed = discord.Embed(description="\n".join(lines), color=color)
             image_url = panel_cfg.get("image") or panel_cfg.get("image_url")
             if image_url:
-                embed.set_image(url=image_url)
-            view = ApplicationPanelView(forms)
+            embed.set_image(url=image_url)
+            view = ApplicationPanelView(visible_forms)
         else:
             from views.panel_customizer import build_panel_embed
             embed = build_panel_embed(panel_cfg) if panel_cfg else primary_embed("📋 Applications", "Select an application below to submit.")

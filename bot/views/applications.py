@@ -114,6 +114,7 @@ class ApplicationFormButton(discord.ui.Button):
         super().__init__(
             style=discord.ButtonStyle.secondary,
             emoji=emoji_str,
+            label=" ",
             custom_id=f"app:btn:{form['name'][:80]}",
             row=row,
         )
