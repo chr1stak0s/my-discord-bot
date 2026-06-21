@@ -118,47 +118,6 @@ class ApplicationFormButton(discord.ui.Button):
             row=row,
         )
         self.form_name = form["name"]
-    async def callback(self, interaction: discord.Interaction):
-        cfg = await get_guild_config(interaction.guild_id)
-        forms = cfg.get("application_forms", [])
-        form = next((f for f in forms if f["name"] == self.form_name), None)
-        if not form:
-            await interaction.response.send_message(embed=error_embed("Not Found", "This form no longer exists."), ephemeral=True)
-            return
-        if not form.get("is_open", True):
-            await interaction.response.send_message(embed=error_embed("Closed", f"Applications for **{form['name']}** are currently closed."), ephemeral=True)
-            return
-        existing = await Database.db.applications.find_one({
-            "guild_id": interaction.guild_id,
-            "user_id": interaction.user.id,
-            "form_name": form["name"],
-            "status": "pending",
-        })
-        if existing:
-            await interaction.response.send_message(
-                embed=warning_embed("Pending Application", f"You already have a pending **{form['name']}** application."),
-                ephemeral=True,
-            )
-            return
-        questions = form.get("questions", [])
-        if not questions:
-            await interaction.response.send_message(embed=error_embed("No Questions", "This form has no questions configured."), ephemeral=True)
-            return
-        modal = ApplicationModal(form, questions[:5])
-        await interaction.response.send_modal(modal)
-
-
-
-class ApplicationFormButton(discord.ui.Button):
-    def __init__(self, form: dict, row: int):
-        emoji_str = form.get("emoji", "📋")
-        super().__init__(
-            style=discord.ButtonStyle.secondary,
-            emoji=emoji_str,
-            custom_id=f"app:btn:{form['name'][:80]}",
-            row=row,
-        )
-        self.form_name = form["name"]
 
     async def callback(self, interaction: discord.Interaction):
         cfg = await get_guild_config(interaction.guild_id)
@@ -198,8 +157,8 @@ class ApplicationPanelView(discord.ui.View):
     """Buttons style — one emoji button per form."""
     def __init__(self, forms: list[dict]):
         super().__init__(timeout=None)
-        for i, form in enumerate(forms[:25]):
-            self.add_item(ApplicationFormButton(form, row=i // 5))
+        for i, form in enumerate(forms[:5]):
+            self.add_item(ApplicationFormButton(form, row=i))
 
 
 class ApplicationDropdownPanelView(discord.ui.View):

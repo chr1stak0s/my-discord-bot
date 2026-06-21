@@ -509,6 +509,7 @@ class AppPanelCustomizerView(discord.ui.View):
         new_style = "dropdown" if current == "buttons" else "buttons"
         self.data["panel_style"] = new_style
         button.label = "📋 Style: Dropdown" if new_style == "dropdown" else "🔘 Style: Buttons"
+        await interaction.response.defer()
         await self._refresh(interaction)
 
     @discord.ui.button(label="👁️ Preview", style=discord.ButtonStyle.secondary, row=2)
