@@ -69,15 +69,26 @@ class Applications(commands.Cog):
         if any(f["name"].lower() == name.lower() for f in forms):
             await interaction.response.send_message(embed=error_embed("Already Exists", f"A form named `{name}` already exists."), ephemeral=True)
             return
-        modal = FormQuestionModal(name)
+        modal = FormQPage1Modal(name)
         await interaction.response.send_modal(modal)
         await modal.wait()
-        questions = [q for q in modal.questions if q]
-        if not questions:
+        if not modal.questions:
             return
-        forms.append({"name": name, "description": description, "questions": questions, "emoji": "📋"})
+        continue_view = FormQContinueView(interaction.user.id, name, modal.questions)
+        preview = "\n".join(f"`{i+1}.` {q}" for i, q in enumerate(modal.questions))
+        await interaction.followup.send(
+            embed=info_embed(
+                f"Questions 1–5 added  ({len(modal.questions)} filled)",
+                f"{preview}\n\nClick **Add Q6–Q10** to add more, or **Done** to save the form now.",
+            ),
+            view=continue_view,
+            ephemeral=True,
+        )
+        await continue_view.wait()
+        questions = continue_view.final_questions or modal.questions
+        forms.append({"name": name, "description": description, "questions": questions, "emoji": "📋", "open": True})
         await update_guild_config(interaction.guild_id, {"application_forms": forms})
-        embed = success_embed("Form Created", f"Application form **{name}** created with {len(questions)} questions.")
+        embed = success_embed("Form Created", f"Application form **{name}** created with **{len(questions)}** question(s).")
         embed.add_field(name="Questions", value="\n".join(f"`{i+1}.` {q}" for i, q in enumerate(questions)), inline=False)
         await interaction.followup.send(embed=embed, ephemeral=True)
 
@@ -104,18 +115,29 @@ class Applications(commands.Cog):
         if not form:
             await interaction.response.send_message(embed=error_embed("Not Found", f"No form named `{name}` found."), ephemeral=True)
             return
-        modal = FormQuestionModal(name)
+        modal = FormQPage1Modal(name, existing=form.get("questions", []))
         await interaction.response.send_modal(modal)
         await modal.wait()
-        questions = [q for q in modal.questions if q]
-        if not questions:
+        if not modal.questions:
             return
+        continue_view = FormQContinueView(interaction.user.id, name, modal.questions)
+        preview = "\n".join(f"`{i+1}.` {q}" for i, q in enumerate(modal.questions))
+        await interaction.followup.send(
+            embed=info_embed(
+                f"Questions 1–5 set  ({len(modal.questions)} filled)",
+                f"{preview}\n\nClick **Add Q6–Q10** to add more, or **Done** to save.",
+            ),
+            view=continue_view,
+            ephemeral=True,
+        )
+        await continue_view.wait()
+        questions = continue_view.final_questions or modal.questions
         for f in forms:
             if f["name"].lower() == name.lower():
                 f["questions"] = questions
                 break
         await update_guild_config(interaction.guild_id, {"application_forms": forms})
-        await interaction.followup.send(embed=success_embed("Form Updated", f"Form **{name}** updated with {len(questions)} questions."), ephemeral=True)
+        await interaction.followup.send(embed=success_embed("Form Updated", f"Form **{name}** updated with **{len(questions)}** question(s)."), ephemeral=True)
 
     @app_group.command(name="panel", description="Send an application panel to a channel")
     @app_commands.describe(channel="Channel to send the panel to")
@@ -142,7 +164,7 @@ class Applications(commands.Cog):
                 lines.append(f"{emoji}  **{form['name'].upper()}**")
                 lines.append(separator)
                 lines.append("")
-            lines.append("-# Πατήστε το αντίστοιχο κουμπί για να υποβάλετε αίτηση.")
+            lines.append("-# Press the corresponding button to submit an application.")
             embed = discord.Embed(description="\n".join(lines), color=color)
             image_url = panel_cfg.get("image") or panel_cfg.get("image_url")
             if image_url:
@@ -239,28 +261,83 @@ class Applications(commands.Cog):
             await interaction.edit_original_response(embed=success_embed("Reset", "All application data deleted."), view=None)
 
 
-class FormQuestionModal(discord.ui.Modal, title="Application Form Questions"):
-    q1 = discord.ui.TextInput(label="Question 1", max_length=256, required=True)
-    q2 = discord.ui.TextInput(label="Question 2", max_length=256, required=False)
-    q3 = discord.ui.TextInput(label="Question 3", max_length=256, required=False)
-    q4 = discord.ui.TextInput(label="Question 4", max_length=256, required=False)
-    q5 = discord.ui.TextInput(label="Question 5", max_length=256, required=False)
-
-    def __init__(self, form_name: str):
-        super().__init__(title=f"Questions for '{form_name[:30]}'")
-        self.questions = []
+class FormQPage1Modal(discord.ui.Modal):
+    q1 = discord.ui.TextInput(label="Question 1  *required", max_length=45, required=True)
+    q2 = discord.ui.TextInput(label="Question 2  (optional)", max_length=45, required=False)
+    q3 = discord.ui.TextInput(label="Question 3  (optional)", max_length=45, required=False)
+    q4 = discord.ui.TextInput(label="Question 4  (optional)", max_length=45, required=False)
+    q5 = discord.ui.TextInput(label="Question 5  (optional)", max_length=45, required=False)
+    def __init__(self, form_name: str, existing: list[str] | None = None):
+        super().__init__(title=f"'{form_name[:25]}' — Q1–Q5")
+        existing = existing or []
+        fields = [self.q1, self.q2, self.q3, self.q4, self.q5]
+        for i, f in enumerate(fields):
+            f.default = existing[i] if i < len(existing) else ""
+        self.questions: list[str] = []
 
     async def on_submit(self, interaction: discord.Interaction):
-        self.questions = [
-            self.q1.value,
-            self.q2.value,
-            self.q3.value,
-            self.q4.value,
-            self.q5.value,
-        ]
+        self.questions = [q for q in [
+            self.q1.value.strip(), self.q2.value.strip(),
+            self.q3.value.strip(), self.q4.value.strip(), self.q5.value.strip(),
+        ] if q]
         await interaction.response.defer()
         self.stop()
+
+class FormQPage2Modal(discord.ui.Modal):
+    q6  = discord.ui.TextInput(label="Question 6  (optional)", max_length=45, required=False)
+    q7  = discord.ui.TextInput(label="Question 7  (optional)", max_length=45, required=False)
+    q8  = discord.ui.TextInput(label="Question 8  (optional)", max_length=45, required=False)
+    q9  = discord.ui.TextInput(label="Question 9  (optional)", max_length=45, required=False)
+    q10 = discord.ui.TextInput(label="Question 10 (optional)", max_length=45, required=False)
+    def __init__(self, form_name: str, existing: list[str] | None = None):
+        super().__init__(title=f"'{form_name[:25]}' — Q6–Q10")
+        existing = existing or []
+        fields = [self.q6, self.q7, self.q8, self.q9, self.q10]
+        for i, f in enumerate(fields):
+            f.default = existing[i + 5] if i + 5 < len(existing) else ""
+        self.questions: list[str] = []
+    async def on_submit(self, interaction: discord.Interaction):
+        self.questions = [q for q in [
+            self.q6.value.strip(), self.q7.value.strip(),
+            self.q8.value.strip(), self.q9.value.strip(), self.q10.value.strip(),
+        ] if q]
+        await interaction.response.defer()
+        self.stop()
+class FormQContinueView(discord.ui.View):
+    """Appears after Q1-Q5, lets the user optionally add Q6-Q10 then signals done."""
+    def __init__(self, user_id: int, form_name: str, page1_qs: list[str]):
+        super().__init__(timeout=120)
+        self.user_id = user_id
+        self.form_name = form_name
+        self.page1_qs = page1_qs
+        self.final_questions: list[str] | None = None
+    def _disable_all(self):
+        for child in self.children:
+            child.disabled = True  # type: ignore[union-attr]
+    @discord.ui.button(label="➕ Add Q6–Q10 (optional)", style=discord.ButtonStyle.primary)
+    async def add_more(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if interaction.user.id != self.user_id:
+            await interaction.response.send_message("Not yours.", ephemeral=True)
+            return
+        modal = FormQPage2Modal(self.form_name)
+        await interaction.response.send_modal(modal)
+        await modal.wait()
+        self.final_questions = self.page1_qs + modal.questions
+        self._disable_all()
+        await interaction.message.edit(view=self)
+        self.stop()
+    @discord.ui.button(label="💾 Done  (Q1–Q5 only)", style=discord.ButtonStyle.success)
+    async def done(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if interaction.user.id != self.user_id:
+            await interaction.response.send_message("Not yours.", ephemeral=True)
+            return
+        self.final_questions = self.page1_qs
+        self._disable_all()
+        await interaction.response.edit_message(view=self)
+        self.stop()
+FormQuestionModal = FormQPage1Modal
 
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Applications(bot))
+
