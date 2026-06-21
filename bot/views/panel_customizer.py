@@ -341,214 +341,27 @@ class AppPanelCustomizerView(discord.ui.View):
             await interaction.response.send_message("This customizer belongs to someone else.", ephemeral=True)
             return False
         return True
-    
+
     def _style(self) -> str:
         return self.data.get("panel_style", "buttons")
 
     def _summary(self) -> str:
         forms = self.data.get("forms", [])
-        style = "🔘 Buttons" if self._style() == "buttons" else "📋 Dropdown"
+        style = self._style()
         lines = [
-            f"**Style:** {style}",
+            f"**Title:** {self.data.get('title') or '*Not set*'}",
             f"**Color:** #{self.data.get('color', 0x5865F2):06X}" if isinstance(self.data.get('color'), int) else f"**Color:** {self.data.get('color', '#5865F2')}",
+            f"**Thumbnail:** {'✅' if self.data.get('thumbnail') else '❌'}",
             f"**Image:** {'✅' if self.data.get('image') else '❌'}",
             f"**Footer:** {self.data.get('footer_text') or '*Not set*'}",
+            f"**Panel Style:** {'🔘 Buttons' if style == 'buttons' else '📋 Dropdown'}",
             f"**Forms:** {', '.join(f['name'] for f in forms) if forms else '*None — add at least 1*'}",
         ]
         return "\n".join(lines)
 
     async def _refresh(self, interaction: discord.Interaction):
         embed = primary_embed("📋 Application Panel Customizer", self._summary())
-        embed.set_footer(text="Use the buttons below to customize your application panel")
-        await interaction.edit_original_response(embed=embed, view=self)
-
-    @discord.ui.button(label="🔘 Style: Buttons", style=discord.ButtonStyle.primary, row=0)
-    async def toggle_style(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if not await self._check(interaction): return
-        current = self._style()
-        new_style = "dropdown" if current == "buttons" else "buttons"
-        self.data["panel_style"] = new_style
-        button.label = "📋 Style: Dropdown" if new_style == "dropdown" else "🔘 Style: Buttons"
-        await self._refresh(interaction)
-
-    @discord.ui.button(label="🎨 Color", style=discord.ButtonStyle.primary, row=0)
-    async def set_color(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if not await self._check(interaction): return
-        modal = ColorModal(self.data)
-        await interaction.response.send_modal(modal)
-        await modal.wait()
-        if modal.result:
-            self.data.update(modal.result)
-            await self._refresh(interaction)
-
-    @discord.ui.button(label="🖼️ Images", style=discord.ButtonStyle.primary, row=0)
-    async def set_images(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if not await self._check(interaction): return
-        modal = MediaModal(self.data)
-        await interaction.response.send_modal(modal)
-        await modal.wait()
-        if modal.result:
-            self.data.update(modal.result)
-            await self._refresh(interaction)
-
-    @discord.ui.button(label="📝 Footer", style=discord.ButtonStyle.primary, row=0)
-    async def set_footer(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if not await self._check(interaction): return
-        modal = FooterModal(self.data)
-        await interaction.response.send_modal(modal)
-        await modal.wait()
-        if modal.result:
-            self.data.update(modal.result)
-            await self._refresh(interaction)
-
-    @discord.ui.button(label="➕ Add Form", style=discord.ButtonStyle.success, row=1)
-    async def add_form(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if not await self._check(interaction): return
-        modal = AddFormModal()
-        await interaction.response.send_modal(modal)
-        await modal.wait()
-        if modal.result:
-            forms = self.data.get("forms", [])
-            if any(f["name"].lower() == modal.result["name"].lower() for f in forms):
-                await interaction.followup.send(embed=error_embed("Already Exists", f"**{modal.result['name']}** already exists."), ephemeral=True)
-                return
-            forms.append(modal.result)
-            self.data["forms"] = forms
-            await self._refresh(interaction)
-
-    @discord.ui.button(label="❌ Remove Form", style=discord.ButtonStyle.danger, row=1)
-    async def remove_form(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if not await self._check(interaction): return
-
-        class RemoveFormModal(discord.ui.Modal, title="Remove Application Form"):
-            name = discord.ui.TextInput(label="Form Name to Remove", max_length=100)
-            def __init__(s):
-                super().__init__()
-                s.result = None
-            async def on_submit(s, inter):
-                s.result = s.name.value.strip()
-                await inter.response.defer()
-                s.stop()
-
-        modal = RemoveFormModal()
-        await interaction.response.send_modal(modal)
-        await modal.wait()
-        if modal.result:
-            forms = self.data.get("forms", [])
-            new = [f for f in forms if f["name"].lower() != modal.result.lower()]
-            if len(new) == len(forms):
-                await interaction.followup.send(embed=error_embed("Not Found", f"No form named **{modal.result}**."), ephemeral=True)
-                return
-            self.data["forms"] = new
-            await self._refresh(interaction)
-
-    @discord.ui.button(label="👁️ Preview", style=discord.ButtonStyle.secondary, row=1)
-    async def preview(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if not await self._check(interaction): return
-        forms = self.data.get("forms", [])
-        if self._style() == "buttons":
-            separator = "─" * 22
-            lines = []
-            for form in forms:
-                emoji = form.get("emoji", "📋")
-                lines.append(f"{emoji} **{form['name'].upper()}**")
-                lines.append(separator)
-            lines.append("-# Πατήστε το αντίστοιχο κουμπί για να υποβάλετε αίτηση.")
-            color_raw = self.data.get("color", 0x5865F2)
-            color = int(str(color_raw).lstrip("#"), 16) if isinstance(color_raw, str) else color_raw
-            embed = discord.Embed(description="\n".join(lines), color=color)
-            image_url = self.data.get("image") or self.data.get("image_url")
-            if image_url:
-                embed.set_image(url=image_url)
-        else:
-            embed = build_panel_embed(self.data)
-            if forms:
-                embed.description = (self.data.get("description") or "Select an application below.") + "\n\n" + "\n".join(f"{f.get('emoji','📋')} **{f['name']}** — {f.get('description','')}" for f in forms)
-        await interaction.response.send_message(embed=embed, ephemeral=True)
-
-    @discord.ui.button(label="💾 Save & Send", style=discord.ButtonStyle.success, row=2)
-    async def save_send(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if not await self._check(interaction): return
-        forms = self.data.get("forms", [])
-        if not forms:
-            await interaction.response.send_message(embed=error_embed("No Forms", "Add at least one form before sending."), ephemeral=True)
-            return
-        modal = SendChannelModal()
-        await interaction.response.send_modal(modal)
-        await modal.wait()
-        if not modal.result:
-            return
-        raw = modal.result
-        channel = interaction.guild.get_channel(int(raw)) if raw.isdigit() else discord.utils.get(interaction.guild.text_channels, name=raw.lower())
-        if not channel:
-            await interaction.followup.send(embed=error_embed("Channel Not Found", f"Could not find `{raw}`."), ephemeral=True)
-            return
-        from database import update_guild_config
-        await update_guild_config(interaction.guild_id, {"app_panel": self.data, "app_forms": forms})
-        from views.applications import ApplicationPanelView, ApplicationDropdownPanelView
-        if self._style() == "buttons":
-            separator = "─" * 22
-            lines = []
-            for form in forms:
-                emoji = form.get("emoji", "📋")
-                lines.append(f"{emoji} **{form['name'].upper()}**")
-                lines.append(separator)
-            lines.append("-# Πατήστε το αντίστοιχο κουμπί για να υποβάλετε αίτηση.")
-            color_raw = self.data.get("color", 0x5865F2)
-            color = int(str(color_raw).lstrip("#"), 16) if isinstance(color_raw, str) else color_raw
-            embed = discord.Embed(description="\n".join(lines), color=color)
-            image_url = self.data.get("image") or self.data.get("image_url")
-            if image_url:
-                embed.set_image(url=image_url)
-            view = ApplicationPanelView(forms)
-        else:
-            embed = build_panel_embed(self.data)
-            view = ApplicationDropdownPanelView(forms)
-        await interaction.followup.send(embed=success_embed("Panel Sent!", f"Application panel sent to {channel.mention}."), ephemeral=True)
-
-    @discord.ui.button(label="💾 Save Only", style=discord.ButtonStyle.secondary, row=2)
-    async def save_only(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if not await self._check(interaction): return
-        from database import update_guild_config
-        forms = self.data.get("forms", [])
-        await update_guild_config(interaction.guild_id, {"app_panel": self.data, "app_forms": forms})
-        await interaction.response.send_message(embed=success_embed("Saved!", "Panel design saved."), ephemeral=True)
-
-
-# ─── Welcome Embed Customizer ─────────────────────────────────────────────────
-
-class WelcomeCustomizerView(discord.ui.View):
-    """Customizes either the join or leave embed."""
-
-    def __init__(self, user_id: int, kind: str, data: dict):
-        super().__init__(timeout=300)
-        self.user_id = user_id
-        self.kind = kind   # "welcome" or "leave"
-        self.data = data
-
-    async def _check(self, interaction: discord.Interaction) -> bool:
-        if interaction.user.id != self.user_id:
-            await interaction.response.send_message("This customizer belongs to someone else.", ephemeral=True)
-            return False
-        return True
-
-    def _label(self):
-        return "👋 Join Embed" if self.kind == "welcome" else "👋 Leave Embed"
-
-    def _summary(self) -> str:
-        lines = [
-            f"**Title:** {self.data.get('title') or '*Default*'}",
-            f"**Description:** {(self.data.get('description') or '')[:60] or '*Default*'}",
-            f"**Color:** #{self.data.get('color', 0x5865F2):06X}" if isinstance(self.data.get('color'), int) else f"**Color:** {self.data.get('color','#5865F2')}",
-            f"**Thumbnail:** {'✅ Custom' if self.data.get('thumbnail') else '✅ Member avatar (default)'}",
-            f"**Image:** {'✅' if self.data.get('image') else '❌'}",
-            f"**Footer:** {self.data.get('footer_text') or '*Default*'}",
-        ]
-        return "\n".join(lines)
-
-    async def _refresh(self, interaction: discord.Interaction):
-        embed = primary_embed(self._label() + " Customizer", self._summary())
-        embed.set_footer(text="Variables: {user} {server} {count} • Use Preview to test")
+        embed.set_footer(text="Use the buttons below to customize • Preview shows a live preview")
         await interaction.edit_original_response(embed=embed, view=self)
 
     @discord.ui.button(label="✏️ Title & Description", style=discord.ButtonStyle.primary, row=0)
@@ -591,39 +404,72 @@ class WelcomeCustomizerView(discord.ui.View):
             self.data.update(modal.result)
             await self._refresh(interaction)
 
+    @discord.ui.button(label="🔘 Style: Buttons", style=discord.ButtonStyle.secondary, row=1)
+    async def toggle_style(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if not await self._check(interaction): return
+        current = self._style()
+        new_style = "dropdown" if current == "buttons" else "buttons"
+        self.data["panel_style"] = new_style
+        button.label = "📋 Style: Dropdown" if new_style == "dropdown" else "🔘 Style: Buttons"
+        await self._refresh(interaction)
+
     @discord.ui.button(label="👁️ Preview", style=discord.ButtonStyle.secondary, row=1)
     async def preview(self, interaction: discord.Interaction, button: discord.ui.Button):
         if not await self._check(interaction): return
-        member = interaction.user
-        data = dict(self.data)
-        title = (data.get("title") or ("👋 Welcome, {user}!" if self.kind == "welcome" else "👋 Member Left")).replace("{user}", member.display_name).replace("{server}", interaction.guild.name).replace("{count}", str(interaction.guild.member_count))
-        desc = (data.get("description") or "").replace("{user}", member.mention).replace("{server}", interaction.guild.name).replace("{count}", str(interaction.guild.member_count))
-        data["title"] = title
-        data["description"] = desc
-        embed = build_panel_embed(data)
-        if not data.get("thumbnail"):
-            embed.set_thumbnail(url=member.display_avatar.url)
+        embed = build_panel_embed(self.data)
+        forms = self.data.get("forms", [])
+        style = self._style()
+        if forms:
+            if style == "buttons":
+                embed.add_field(
+                    name="Panel Buttons",
+                    value="\n".join(f"{f.get('emoji', '📋')} **{f['name']}**" for f in forms),
+                    inline=False,
+                )
+            else:
+                embed.add_field(
+                    name="Panel Dropdown",
+                    value="*A dropdown menu will appear with the forms listed below*\n" + "\n".join(f"{f.get('emoji', '📋')} {f['name']}" for f in forms),
+                    inline=False,
+                )
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
-    @discord.ui.button(label="💾 Save", style=discord.ButtonStyle.success, row=1)
-    async def save(self, interaction: discord.Interaction, button: discord.ui.Button):
+    @discord.ui.button(label="💾 Save & Send", style=discord.ButtonStyle.success, row=2)
+    async def save_send(self, interaction: discord.Interaction, button: discord.ui.Button):
         if not await self._check(interaction): return
+        forms = self.data.get("forms", [])
+        if not forms:
+            await interaction.response.send_message(embed=error_embed("No Forms", "Add at least one application form before sending."), ephemeral=True)
+            return
+        modal = SendChannelModal()
+        await interaction.response.send_modal(modal)
+        await modal.wait()
+        if not modal.result:
+            return
+        raw = modal.result
+        channel = interaction.guild.get_channel(int(raw)) if raw.isdigit() else discord.utils.get(interaction.guild.text_channels, name=raw.lower())
+        if not channel:
+            await interaction.followup.send(embed=error_embed("Channel Not Found", f"Could not find channel `{raw}`. Use the channel ID."), ephemeral=True)
+            return
         from database import update_guild_config
-        key = f"{self.kind}_embed"
-        await update_guild_config(interaction.guild_id, {key: self.data})
-        await interaction.response.send_message(
-            embed=success_embed("Saved!", f"{'Join' if self.kind == 'welcome' else 'Leave'} embed saved. It will be used for all future messages."),
-            ephemeral=True,
-        )
+        await update_guild_config(interaction.guild_id, {"application_panel": self.data})
+        style = self._style()
+        embed = build_panel_embed(self.data)
+        if style == "buttons":
+            from views.applications import ApplicationPanelView
+            view = ApplicationPanelView(forms)
+        else:
+            from views.applications import ApplicationDropdownPanelView
+            view = ApplicationDropdownPanelView(forms)
+        await channel.send(embed=embed, view=view)
+        await interaction.followup.send(embed=success_embed("Panel Sent!", f"Your custom application panel has been sent to {channel.mention}."), ephemeral=True)
 
-    @discord.ui.button(label="🔄 Reset to Default", style=discord.ButtonStyle.danger, row=1)
-    async def reset(self, interaction: discord.Interaction, button: discord.ui.Button):
+    @discord.ui.button(label="💾 Save Only", style=discord.ButtonStyle.secondary, row=2)
+    async def save_only(self, interaction: discord.Interaction, button: discord.ui.Button):
         if not await self._check(interaction): return
         from database import update_guild_config
-        key = f"{self.kind}_embed"
-        self.data = {}
-        await update_guild_config(interaction.guild_id, {key: {}})
-        await self._refresh(interaction)
+        await update_guild_config(interaction.guild_id, {"application_panel": self.data})
+        await interaction.response.send_message(embed=success_embed("Saved!", "Application panel design saved. Use **Save & Send** to post it to a channel."), ephemeral=True)
 
 
 # ─── Verification Panel Customizer ────────────────────────────────────────────
