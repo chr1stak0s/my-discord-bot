@@ -206,8 +206,7 @@ class ApplicationDropdownPanelView(discord.ui.View):
     """Dropdown style — single select menu."""
     def __init__(self, forms: list[dict]):
         super().__init__(timeout=None)
-        for i, form in enumerate(forms[:25]):
-            self.add_item(ApplicationFormButton(form, row=i // 5))
+        self.add_item(ApplicationSelect(forms))
 
 
 class ApplicationReviewView(discord.ui.View):
