@@ -1,12 +1,9 @@
 import discord
 from discord import app_commands
 from discord.ext import commands
-import logging
 from database import Database, get_guild_config, update_guild_config
 from utils import success_embed, error_embed, info_embed, primary_embed, is_admin, is_application_reviewer
-from views.applications import ApplicationPanelView, ApplicationReviewView
-
-logger = logging.getLogger(__name__)
+from views.applications import ApplicationPanelView, ApplicationDropdownPanelView
 
 
 class Applications(commands.Cog):
@@ -136,7 +133,6 @@ class Applications(commands.Cog):
         color = int(str(color_raw).lstrip("#"), 16) if isinstance(color_raw, str) else color_raw
         style = panel_cfg.get("panel_style", "buttons")
 
-        from views.applications import ApplicationPanelView, ApplicationDropdownPanelView
         if style == "buttons":
             visible_forms = forms[:5]
             separator = "─" * 28
@@ -150,7 +146,7 @@ class Applications(commands.Cog):
             embed = discord.Embed(description="\n".join(lines), color=color)
             image_url = panel_cfg.get("image") or panel_cfg.get("image_url")
             if image_url:
-            embed.set_image(url=image_url)
+                embed.set_image(url=image_url)
             view = ApplicationPanelView(visible_forms)
         else:
             from views.panel_customizer import build_panel_embed
@@ -216,7 +212,6 @@ class Applications(commands.Cog):
         if "forms" not in data:
             data["forms"] = cfg.get("application_forms", [])
         from views.panel_customizer import AppPanelCustomizerView
-        from utils.helpers import primary_embed as _primary
         view = AppPanelCustomizerView(interaction.user.id, data)
         forms = data.get("forms", [])
         lines = [
@@ -227,7 +222,7 @@ class Applications(commands.Cog):
             f"**Footer:** {data.get('footer_text') or '*Not set*'}",
             f"**Forms:** {', '.join(f['name'] for f in forms) if forms else '*None — add at least 1*'}",
         ]
-        embed = _primary("📋 Application Panel Customizer", "\n".join(lines))
+        embed = primary_embed("📋 Application Panel Customizer", "\n".join(lines))
         embed.set_footer(text="Use the buttons below to customize • Preview shows a live preview")
         await interaction.followup.send(embed=embed, view=view, ephemeral=True)
 
