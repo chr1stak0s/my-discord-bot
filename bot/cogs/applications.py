@@ -3,8 +3,8 @@ from discord import app_commands
 from discord.ext import commands
 import logging
 from database import Database, get_guild_config, update_guild_config
-from utils import success_embed, error_embed, info_embed, primary_embed, is_admin, is_application_reviewer
-from views.applications import ApplicationPanelView, ApplicationReviewView
+from utils import success_embed, error_embed, info_embed, primary_embed, is_admin
+from views.applications import ApplicationPanelView
 
 logger = logging.getLogger(__name__)
 
@@ -121,18 +121,37 @@ class Applications(commands.Cog):
         await interaction.followup.send(embed=success_embed("Form Updated", f"Form **{name}** updated with {len(questions)} questions."), ephemeral=True)
 
     @app_group.command(name="panel", description="Send an application panel to a channel")
-    @app_commands.describe(channel="Channel to send the panel to", title="Panel title")
+    @app_commands.describe(channel="Channel to send the panel to")
     @is_admin()
-    async def panel(self, interaction: discord.Interaction, channel: discord.TextChannel, title: str = "📋 Applications"):
+    async def panel(self, interaction: discord.Interaction, channel: discord.TextChannel):
         await interaction.response.defer(ephemeral=True)
         cfg = await get_guild_config(interaction.guild_id)
         forms = cfg.get("application_forms", [])
         if not forms:
             await interaction.followup.send(embed=error_embed("No Forms", "Create application forms first with `/applications create`."), ephemeral=True)
             return
-        embed = primary_embed(title, "Select an application below to submit your application.")
-        embed.set_footer(text=f"{interaction.guild.name} • Applications")
-        view = ApplicationPanelView(forms)
+        panel_cfg = cfg.get("application_panel", {})
+        color_raw = panel_cfg.get("color", 0x5865F2)
+        color = int(str(color_raw).lstrip("#"), 16) if isinstance(color_raw, str) else color_raw
+        style = panel_cfg.get("panel_style", "buttons")
+        from views.applications import ApplicationPanelView, ApplicationDropdownPanelView
+        if style == "buttons":
+            separator = "─" * 22
+            lines = []
+            for form in forms:
+                emoji = form.get("emoji", "📋")
+                lines.append(f"{emoji} **{form['name'].upper()}**")
+                lines.append(separator)
+            lines.append("-# Πατήστε το αντίστοιχο κουμπί για να υποβάλετε αίτηση.")
+            embed = discord.Embed(description="\n".join(lines), color=color)
+            image_url = panel_cfg.get("image") or panel_cfg.get("image_url")
+            if image_url:
+                embed.set_image(url=image_url)
+            view = ApplicationPanelView(forms)
+        else:
+            from views.panel_customizer import build_panel_embed
+            embed = build_panel_embed(panel_cfg) if panel_cfg else primary_embed("📋 Applications", "Select an application below to submit.")
+            view = ApplicationDropdownPanelView(forms)
         await channel.send(embed=embed, view=view)
         await interaction.followup.send(embed=success_embed("Panel Sent", f"Application panel sent to {channel.mention}."), ephemeral=True)
 
