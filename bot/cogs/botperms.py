@@ -668,12 +668,12 @@ class BotPerms(commands.Cog, name="BotPerms"):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    bot_group = app_commands.Group(
+    mgmt_group = app_commands.Group(
         name="bot",
         description="Bot management commands",
     )
 
-    @bot_group.command(
+    @mgmt_group.command(
         name="users",
         description="Configure which roles can use each bot command",
     )
@@ -695,7 +695,7 @@ class BotPerms(commands.Cog, name="BotPerms"):
             ephemeral=True,
         )
 
-    @bot_group.command(
+    @mgmt_group.command(
         name="permissions",
         description="View all active role permission rules",
     )
@@ -736,7 +736,7 @@ class BotPerms(commands.Cog, name="BotPerms"):
 
         await interaction.followup.send(embed=embed, ephemeral=True)
 
-    @bot_group.command(
+    @mgmt_group.command(
         name="reset",
         description="Remove ALL custom role restrictions and restore defaults",
     )
