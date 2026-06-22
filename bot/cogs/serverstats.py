@@ -42,6 +42,8 @@ class ServerStatsCog(commands.Cog, name="ServerStats"):
         self.bot = bot
         # guild_id → datetime of last successful update this session
         self._last_updated: dict[int, datetime.datetime] = {}
+
+    async def cog_load(self):
         self.auto_update.start()
 
     def cog_unload(self):
@@ -55,16 +57,19 @@ class ServerStatsCog(commands.Cog, name="ServerStats"):
         try:
             docs = await Database.db.guilds.find(
                 {"serverstats.category_id": {"$exists": True, "$ne": None}}
-            ).to_list(length=None)
+            ).to_list(1000)
         except Exception as exc:
-            logger.error(f"serverstats auto_update: failed to query DB: {exc}")
+            logger.error(f"[serverstats] auto_update DB query failed: {exc}")
             return
 
         for doc in docs:
-            guild = self.bot.get_guild(doc["guild_id"])
-            if guild is None:
-                continue
-            await self._push_stats(guild, doc.get("serverstats", {}))
+            try:
+                guild = self.bot.get_guild(doc["guild_id"])
+                if guild is None:
+                    continue
+                await self._push_stats(guild, doc.get("serverstats", {}))
+            except Exception as exc:
+                logger.error(f"[serverstats] failed to update guild {doc.get('guild_id')}: {exc}")
 
     @auto_update.before_loop
     async def _before_auto_update(self):
@@ -72,7 +77,13 @@ class ServerStatsCog(commands.Cog, name="ServerStats"):
 
     @auto_update.error
     async def _auto_update_error(self, error: Exception):
-        logger.error(f"serverstats auto_update task crashed: {error}", exc_info=True)
+        logger.error(f"[serverstats] auto_update task crashed: {error}", exc_info=True)
+        # Restart the task after 60 s so a one-off error doesn't kill auto-updates
+        await discord.utils.sleep_until(
+            discord.utils.utcnow() + datetime.timedelta(seconds=60)
+        )
+        if not self.auto_update.is_running():
+            self.auto_update.restart()
 
     # ─── Core update helper ────────────────────────────────────────────────────
 
