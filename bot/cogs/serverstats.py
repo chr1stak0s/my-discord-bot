@@ -40,26 +40,36 @@ def _collect_stats(guild: discord.Guild) -> dict[str, str]:
 class ServerStatsCog(commands.Cog, name="ServerStats"):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        # guild_id → datetime of last successful update this session
         self._last_updated: dict[int, datetime.datetime] = {}
 
-    async def cog_load(self):
-        self.auto_update.start()
+    
 
     def cog_unload(self):
         self.auto_update.cancel()
 
+         # ─── on_ready: bulletproof task start ─────────────────────────────────────
+    # We start the task here instead of cog_load / __init__ because this
+    # guarantees the bot is fully connected and the event loop is ready.
+    # The is_running() guard prevents double-starts on reconnects.
+    @commands.Cog.listener()
+    async def on_ready(self):
+        if not self.auto_update.is_running():
+            self.auto_update.start()
+            logger.info("[serverstats] auto_update task started")
+
     # ─── Background task ───────────────────────────────────────────────────────
 
-    @tasks.loop(minutes=5)
+     # Interval: 10 min — Discord allows only ~2 channel-name edits per 10 min
+    # per channel. A shorter interval just causes silent rate-limit blocks.
+    @tasks.loop(minutes=10)
     async def auto_update(self):
-        """Refresh every guild's stat channels every 5 minutes."""
+        
         try:
             docs = await Database.db.guilds.find(
                 {"serverstats.category_id": {"$exists": True, "$ne": None}}
             ).to_list(1000)
         except Exception as exc:
-            logger.error(f"[serverstats] auto_update DB query failed: {exc}")
+            logger.error(f"[serverstats] DB query failed: {exc}")
             return
 
         for doc in docs:
@@ -69,16 +79,16 @@ class ServerStatsCog(commands.Cog, name="ServerStats"):
                     continue
                 await self._push_stats(guild, doc.get("serverstats", {}))
             except Exception as exc:
-                logger.error(f"[serverstats] failed to update guild {doc.get('guild_id')}: {exc}")
+                 logger.error(
+                    f"[serverstats] failed to update guild {doc.get('guild_id')}: {exc}",
+                    exc_info=True,
+                )
 
-    @auto_update.before_loop
-    async def _before_auto_update(self):
-        await self.bot.wait_until_ready()
 
     @auto_update.error
     async def _auto_update_error(self, error: Exception):
-        logger.error(f"[serverstats] auto_update task crashed: {error}", exc_info=True)
-        # Restart the task after 60 s so a one-off error doesn't kill auto-updates
+        logger.error(f"[serverstats] task crashed: {error}", exc_info=True)
+        # Wait 60 s then restart so one crash doesn't kill all future updates
         await discord.utils.sleep_until(
             discord.utils.utcnow() + datetime.timedelta(seconds=60)
         )
