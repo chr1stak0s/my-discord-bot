@@ -32,6 +32,8 @@ COMMANDS = {
         ("/tickets panel", "Send ticket panel to a channel"),
         ("/tickets customize", "Customize the ticket panel appearance (color, title, image)"),
         ("/tickets addtype", "Add a ticket type with custom name, emoji & channel pattern"),
+        ("/tickets removetype", "Remove a ticket type"),
+        ("/tickets listtypes", "List all configured ticket types"),
         ("/tickets add", "Add a user to a ticket"),
         ("/tickets remove", "Remove a user from a ticket"),
         ("/tickets rename", "Rename the ticket channel"),
@@ -41,6 +43,7 @@ COMMANDS = {
         ("/tickets delete", "Delete a closed ticket channel"),
         ("/tickets transcript", "Export a ticket transcript"),
         ("/tickets view", "View ticket statistics"),
+        ("/tickets reset", "Reset the entire ticket system"),
     ],
     "📋 Applications": [
         ("/applications setup", "Configure review channel & roles"),
@@ -54,6 +57,7 @@ COMMANDS = {
         ("/applications approve", "Approve a pending application"),
         ("/applications deny", "Deny a pending application"),
         ("/applications view", "View application statistics"),
+        ("/applications reset", "Reset the entire application system"),
     ],
     "📝 Logs": [
         ("/logs setup", "Create log category + 9 channels"),
@@ -72,6 +76,7 @@ COMMANDS = {
     "👋 Welcome": [
         ("/welcome setup", "Set channel, auto-roles, leave channel"),
         ("/welcome preview", "Preview welcome/leave messages"),
+        ("/welcome customize", "Customize the welcome embed appearance"),
         ("/welcome view", "View current configuration"),
         ("/welcome reset", "Reset welcome system"),
     ],
@@ -127,7 +132,7 @@ COMMANDS = {
         ("/starboard view", "View starboard configuration"),
     ],
     "😴 AFK": [
-        ("/afk set", "Set your AFK status"),
+        ("/afk set", "Set your AFK status with an optional reason"),
     ],
     "🎭 Reaction Roles": [
         ("/reactionroles add", "Add a reaction role to a message"),
@@ -135,12 +140,13 @@ COMMANDS = {
         ("/reactionroles list", "List reaction roles for a message"),
     ],
     "✅ Verification": [
-        ("/verification setup", "Send a verification panel"),
+        ("/verification setup", "Send a verification panel to a channel"),
+        ("/verification customize", "Customize the verification panel appearance"),
     ],
-    "🤖 Custom Commands": [
-        ("/customcmd add", "Add a custom command"),
+    "🔧 Custom Commands": [
+        ("/customcmd add", "Add a custom slash command with a text response"),
         ("/customcmd remove", "Remove a custom command"),
-        ("/customcmd list", "List all custom commands"),
+        ("/customcmd list", "List all custom commands and their usage stats"),
     ],
     "🔊 Temp Voice Channels": [
         ("/vc setup", "Add/update a hub channel that creates temp VCs"),
@@ -166,7 +172,7 @@ COMMANDS = {
         ("/vc delete", "Delete your temp voice channel early"),
         ("/vc list", "List all active temporary voice channels"),
     ],
-    "🔒 Private Rooms": [
+    "🏠 Private Rooms": [
         ("/room setup", "Add/update a hub channel that creates private rooms"),
         ("/room removehub", "Remove a private room hub channel"),
         ("/room config", "View all configured room hubs"),
@@ -183,9 +189,20 @@ COMMANDS = {
         ("/room transfer", "Transfer ownership to a member inside the room"),
         ("/room delete", "Delete your private room"),
     ],
+    "📈 Server Stats": [
+        ("/serverstats setup", "Create stat channels (members, bots, online, etc.)"),
+        ("/serverstats refresh", "Force refresh all stat channel values"),
+        ("/serverstats remove", "Remove all stat channels"),
+        ("/serverstats settings", "View current stat channel configuration"),
+    ],
     "📩 DM Commands": [
         ("/dm", "Send a DM to a specific server member (admin only)"),
         ("/dmall", "DM all members or a specific role — requires confirmation (admin only)"),
+    ],
+    "🤖 Bot Management": [
+        ("/bot users", "Open the interactive role-permission manager — restrict any command to specific roles"),
+        ("/bot permissions", "View all active role restrictions across every command"),
+        ("/bot reset", "Remove ALL custom role restrictions and restore defaults"),
     ],
 }
 
