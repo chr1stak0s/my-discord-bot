@@ -156,19 +156,57 @@ class Applications(commands.Cog):
         style = panel_cfg.get("panel_style", "buttons")
 
         if style == "buttons":
-            visible_forms = forms[:5]
-            separator = "─" * 28
-            lines = []
-            for form in visible_forms:
-                emoji = form.get("emoji", "📋")
-                lines.append(f"{emoji}  **{form['name'].upper()}**")
-                lines.append(separator)
-                lines.append("")
-            lines.append("-# Press the corresponding button to submit an application.")
+            visible_forms = forms[:25]   # Discord max: 5 rows × 5 buttons
+            few = len(visible_forms) <= 5
+            lines: list[str] = []
+            if few:
+                # ── Premium aligned layout (≤5 forms) ──
+                # One form section per button row so each button visually
+                # sits beside its matching embed row.
+                div = "─" * 32
+                for form in visible_forms:
+                    emoji   = form.get("emoji", "📋")
+                    name    = form["name"].upper()
+                    desc    = form.get("description", "")
+                    is_open = form.get("open", True)
+                    lock    = "  🔒" if not is_open else ""
+                    lines.append(f"{emoji}  **{name}**{lock}")
+                    if desc:
+                        lines.append(f"-# {desc}")
+                    lines.append(div)
+            else:
+                # ── Compact grid layout (6-25 forms) ──
+                # All forms listed vertically; buttons appear as a 5-wide grid.
+                div = "─" * 28
+                for form in visible_forms:
+                    emoji   = form.get("emoji", "📋")
+                    name    = form["name"].upper()
+                    desc    = form.get("description", "")
+                    is_open = form.get("open", True)
+                    lock    = " 🔒" if not is_open else ""
+                    line = f"{emoji}  **{name}**{lock}"
+                    if desc:
+                        line += f" — {desc}"
+                    lines.append(line)
+                lines.append(div)
+            # Footer instruction (use panel config value or fall back)
+            footer_text = (
+                panel_cfg.get("footer_text")
+                or "Πατήστε το αντίστοιχο κουμπί για να υποβάλετε αίτηση."
+            )
+
+            lines.append("")
+            lines.append(f"-# {footer_text}")
             embed = discord.Embed(description="\n".join(lines), color=color)
+            # Banner image (large, shown at bottom of embed)
             image_url = panel_cfg.get("image") or panel_cfg.get("image_url")
             if image_url:
                 embed.set_image(url=image_url)
+            # Thumbnail (small icon, top-right corner)
+            thumbnail_url = panel_cfg.get("thumbnail")
+            if thumbnail_url:
+                embed.set_thumbnail(url=thumbnail_url)
+
             view = ApplicationPanelView(visible_forms)
         else:
             from views.panel_customizer import build_panel_embed

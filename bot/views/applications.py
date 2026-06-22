@@ -108,13 +108,15 @@ class ApplicationModal(discord.ui.Modal):
             ephemeral=True,
         )
 
+
 class ApplicationFormButton(discord.ui.Button):
-    def __init__(self, form: dict, row: int):
+    def __init__(self, form: dict, row: int, show_label: bool = False):
         emoji_str = form.get("emoji", "📋")
+        label = form["name"][:22] if show_label else " "
         super().__init__(
             style=discord.ButtonStyle.secondary,
             emoji=emoji_str,
-            label=" ",
+            label=label,
             custom_id=f"app:btn:{form['name'][:80]}",
             row=row,
         )
@@ -155,11 +157,14 @@ class ApplicationFormButton(discord.ui.Button):
 
 
 class ApplicationPanelView(discord.ui.View):
-    """Buttons style — one emoji button per form."""
+    """Buttons style — adaptive layout: 1-per-row for ≤5 forms, grid for more."""
     def __init__(self, forms: list[dict]):
         super().__init__(timeout=None)
-        for i, form in enumerate(forms[:5]):
-            self.add_item(ApplicationFormButton(form, row=i))
+        capped = forms[:25]
+        few = len(capped) <= 5
+        for i, form in enumerate(capped):
+            btn_row = i if few else i // 5
+            self.add_item(ApplicationFormButton(form, row=btn_row, show_label=not few))
 
 
 class ApplicationDropdownPanelView(discord.ui.View):
