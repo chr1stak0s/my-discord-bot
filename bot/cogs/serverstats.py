@@ -1,9 +1,10 @@
 import discord
 from discord import app_commands
-from discord.ext import commands
+from discord.ext import commands, tasks
 import datetime
 import logging
-from utils import primary_embed, error_embed
+from database import Database, get_guild_config, update_guild_config
+from utils import success_embed, error_embed, info_embed, primary_embed, is_admin
 
 logger = logging.getLogger(__name__)
 
@@ -21,9 +22,200 @@ def _bar(value: int, total: int, width: int = 16) -> str:
     return "[" + "█" * filled + "░" * (width - filled) + "]"
 
 
-class ServerStats(commands.Cog):
+# ─── Stat channel definitions ──────────────────────────────────────────────────
+# Each entry: (mongo_key, name_template, emoji_label)
+STAT_CHANNELS: list[tuple[str, str, str]] = [
+    ("members", "👥 Members: {value}", "👥 Members"),
+    ("online",  "🟢 Online: {value}",  "🟢 Online"),
+    ("bots",    "🤖 Bots: {value}",    "🤖 Bots"),
+    ("voice",   "🔊 In Voice: {value}", "🔊 In Voice"),
+    ("boosts",  "🚀 Boosts: {value}",  "🚀 Boosts"),
+    ("created", "📅 Created: {value}", "📅 Created"),
+]
+def _collect_stats(guild: discord.Guild) -> dict[str, str]:
+    """Return the current live stats for a guild."""
+    bots    = sum(1 for m in guild.members if m.bot)
+    online  = sum(1 for m in guild.members if not m.bot and m.status != discord.Status.offline)
+    in_vc   = sum(1 for m in guild.members if m.voice is not None)
+    boosts  = guild.premium_subscription_count or 0
+    created = guild.created_at.strftime("%b %d %Y")
+    return {
+        "members": f"{guild.member_count:,}",
+        "online":  f"{online:,}",
+        "bots":    f"{bots:,}",
+        "voice":   f"{in_vc:,}",
+        "boosts":  f"{boosts:,}",
+        "created": created,
+    }
+class ServerStatsCog(commands.Cog, name="ServerStats"):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+
+          # guild_id → datetime of last successful update this session
+        self._last_updated: dict[int, datetime.datetime] = {}
+        self.auto_update.start()
+    def cog_unload(self):
+        self.auto_update.cancel()
+    # ─── Background task ───────────────────────────────────────────────────────
+    @tasks.loop(minutes=5)
+    async def auto_update(self):
+        """Refresh every guild's stat channels every 5 minutes."""
+        try:
+             docs = await Database.db.guilds.find(
+                {"serverstats.category_id": {"$exists": True, "$ne": None}}
+            ).to_list(length=None)
+        except Exception as exc:
+            logger.error(f"serverstats auto_update: failed to query DB: {exc}")
+            return
+        for doc in docs:
+            guild = self.bot.get_guild(doc["guild_id"])
+            if guild is None:
+                continue
+            await self._push_stats(guild, doc.get("serverstats", {}))
+    @auto_update.before_loop
+    async def _before_auto_update(self):
+        await self.bot.wait_until_ready()
+    @auto_update.error
+    async def _auto_update_error(self, error: Exception):
+        logger.error(f"serverstats auto_update task crashed: {error}", exc_info=True)
+    # ─── Core update helper ────────────────────────────────────────────────────
+    async def _push_stats(self, guild: discord.Guild, cfg: dict) -> int:
+        """Edit each stat channel name. Returns number of channels updated."""
+        stats = _collect_stats(guild)
+        channels_map: dict[str, int] = cfg.get("channels", {})
+        updated = 0
+        for key, template, _ in STAT_CHANNELS:
+            ch_id = channels_map.get(key)
+            if not ch_id:
+                continue
+            channel = guild.get_channel(ch_id)
+            if not isinstance(channel, discord.VoiceChannel):
+                continue
+            new_name = template.format(value=stats[key])
+            if channel.name == new_name:
+                continue                             # skip — nothing changed
+            try:
+                await channel.edit(
+                    name=new_name,
+                    reason="Server Stats auto-update",
+                )
+                updated += 1
+            except discord.HTTPException as exc:
+                if exc.status == 429:
+                    logger.warning(
+                        f"[serverstats] rate-limited on guild {guild.id} channel {ch_id} "
+                        f"— will retry next cycle"
+                    )
+                else:
+                    logger.error(f"[serverstats] HTTP {exc.status} updating {ch_id}: {exc}")
+            except Exception as exc:
+                logger.error(f"[serverstats] unexpected error updating {ch_id}: {exc}")
+        self._last_updated[guild.id] = datetime.datetime.utcnow()
+        return updated
+    # ─── Slash commands ────────────────────────────────────────────────────────
+    stats_group = app_commands.Group(
+        name="serverstats",
+        description="Live server statistics channels",
+    )
+    # ── /serverstats setup ────────────────────────────────────────────────────
+    @stats_group.command(
+        name="setup",
+        description="Create a live stats category with auto-updating voice channels",
+    )
+    @is_admin()
+    async def setup(self, interaction: discord.Interaction):
+        await interaction.response.defer(ephemeral=True)
+        guild = interaction.guild
+        # ── Duplicate-setup guard ──────────────────────────────────────────
+        cfg = await get_guild_config(guild.id)
+        existing = cfg.get("serverstats", {})
+        if existing.get("category_id"):
+            cat = guild.get_channel(existing["category_id"])
+            if cat:
+                embed = error_embed(
+                    "Already Configured",
+                    f"Stats are already set up in **{cat.name}**.\n"
+                    "Use `/serverstats remove` to start over, or `/serverstats refresh` to force an update.",
+                )
+                await interaction.followup.send(embed=embed, ephemeral=True)
+                return
+            # Category was deleted externally — clean up and continue
+            await update_guild_config(guild.id, {"serverstats": {}})
+        # ── Bot permission check ──────────────────────────────────────────
+        if not guild.me.guild_permissions.manage_channels:
+            await interaction.followup.send(
+                embed=error_embed(
+                    "Missing Permission",
+                    "I need **Manage Channels** permission to create stat channels.",
+                ),
+                ephemeral=True,
+            )
+            return
+        # ── Create category ───────────────────────────────────────────────
+        overwrites = {
+            guild.default_role: discord.PermissionOverwrite(
+                view_channel=True,
+                connect=False,        # members can see but not join
+            ),
+            guild.me: discord.PermissionOverwrite(
+                view_channel=True,
+                connect=True,
+                manage_channels=True, # bot can rename channels
+            ),
+        }
+        try:
+            category = await guild.create_category(
+                "📊 Server Statistics",
+                overwrites=overwrites,
+                reason=f"Server stats setup by {interaction.user}",
+            )
+        except discord.Forbidden:
+            await interaction.followup.send(
+                embed=error_embed("Forbidden", "I don't have permission to create categories."),
+                ephemeral=True,
+            )
+            return
+        except discord.HTTPException as exc:
+            await interaction.followup.send(
+                embed=error_embed("Error", f"Failed to create category: {exc}"),
+                ephemeral=True,
+            )
+            return
+        # ── Create stat voice channels ────────────────────────────────────
+        stats = _collect_stats(guild)
+        channel_ids: dict[str, int] = {}
+        failed_keys: list[str] = []
+        for key, template, _ in STAT_CHANNELS:
+            name = template.format(value=stats[key])
+            try:
+                ch = await category.create_voice_channel(
+                    name,
+                    overwrites=overwrites,
+                    reason=f"Server stats setup by {interaction.user}",
+                )
+                channel_ids[key] = ch.id
+            except Exception as exc:
+                logger.error(f"[serverstats] failed to create channel '{key}': {exc}")
+                failed_keys.append(key)
+        # ── Persist to MongoDB ────────────────────────────────────────────
+        doc = {
+            "category_id": category.id,
+            "channels":    channel_ids,
+            "created_at":  datetime.datetime.utcnow().isoformat(),
+            "created_by":  interaction.user.id,
+        }
+        await update_guild_config(guild.id, {"serverstats": doc})
+        self._last_updated[guild.id] = datetime.datetime.utcnow()
+        # ── Success response ──────────────────────────────────────────────
+        embed = success_embed(
+            "📊 Server Stats Created",
+            f"**{len(channel_ids)}** live stat channel(s) are now active under {category.mention}.",
+        )
+        embed.add_field(name="Auto-Update Interval", value="Every 5 minutes", inline=True)
+        embed.add_field(name="Channels Created",     value=str(len(channel_ids)), inline=True)
+        if failed_keys:
+            embed.add_field(name="⚠️ Failed Channels", value=", ".join(failed_keys), inline=False)
+        await interaction.followup.send(embed=embed, ephemeral=True)
 
     stats_group = app_commands.Group(name="serverstats", description="Server statistics commands")
 
@@ -192,4 +384,4 @@ class ServerStats(commands.Cog):
 
 
 async def setup(bot: commands.Bot):
-    await bot.add_cog(ServerStats(bot))
+    await bot.add_cog(ServerStatsCog(bot))
