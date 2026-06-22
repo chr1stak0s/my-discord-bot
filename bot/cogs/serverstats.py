@@ -419,21 +419,6 @@ class ServerStatsCog(commands.Cog, name="ServerStats"):
 
         await interaction.followup.send(embed=embed, ephemeral=True)
 
-    # ─── Error handler ─────────────────────────────────────────────────────────
-
-    @stats_group.error
-    async def _group_error(self, interaction: discord.Interaction, error: app_commands.AppCommandError):
-        logger.error(f"[serverstats] command error: {error}", exc_info=True)
-        msg = (
-            error_embed("No Permission", "You need administrator permissions to use server stats commands.")
-            if isinstance(error, (app_commands.MissingPermissions, app_commands.CheckFailure))
-            else error_embed("Error", str(error))
-        )
-        if interaction.response.is_done():
-            await interaction.followup.send(embed=msg, ephemeral=True)
-        else:
-            await interaction.response.send_message(embed=msg, ephemeral=True)
-
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(ServerStatsCog(bot))
