@@ -1,7 +1,7 @@
 """
 /bot users  — interactive role-permission manager for every bot command.
-Admins pick a category → pick a command → assign/remove roles via Discord's
-native Role Select component.  Stored in MongoDB under guild_doc["command_roles"].
+Admins pick a category → choose bulk or per-command → assign/remove roles via
+Discord's native Role Select component.  Stored in MongoDB under guild_doc["command_roles"].
 A global CommandTree check (wired in main.py) enforces these rules on every
 slash command automatically — no changes needed to individual cogs.
 """
@@ -293,7 +293,11 @@ def _cmd_display(group: str, cmd: str) -> str:
     return f"/{cmd}" if group == "_top" else f"/{group} {cmd}"
 
 
-# ─── Embed builder ─────────────────────────────────────────────────────────────
+def _category_keys(category: str) -> list[str]:
+    """Return all storage keys for every command in a category."""
+    entry = REGISTRY[category]
+    return [_cmd_key(entry["group"], name) for name, _ in entry["commands"]]
+# ─── Embed builders ────────────────────────────────────────────────────────────
 
 async def _perm_embed(
     guild: discord.Guild,
@@ -319,6 +323,44 @@ async def _perm_embed(
         embed.add_field(
             name="✅ Allowed Roles",
             value="\n".join(f"• {m}" for m in mentions),
+            inline=False,
+        )
+    embed.set_footer(text="Administrators always bypass role restrictions.")
+    return embed
+async def _category_summary_embed(
+    guild: discord.Guild,
+    category: str,
+) -> discord.Embed:
+    """Show current restrictions for every command in a category."""
+    cfg       = await get_guild_config(guild.id)
+    roles_map = cfg.get("command_roles", {})
+    entry     = REGISTRY[category]
+    group     = entry["group"]
+    restricted   = []
+    unrestricted = []
+    for name, _ in entry["commands"]:
+        key      = _cmd_key(group, name)
+        display  = _cmd_display(group, name)
+        role_ids = roles_map.get(key, [])
+        if role_ids:
+            mentions = [
+                guild.get_role(r).mention if guild.get_role(r) else f"`{r}`"
+                for r in role_ids
+            ]
+            restricted.append(f"`{display}` → {', '.join(mentions)}")
+        else:
+            unrestricted.append(f"`{display}`")
+    embed = primary_embed(f"🔐 {category}", "")
+    if restricted:
+        embed.add_field(
+            name=f"🔒 Restricted ({len(restricted)})",
+            value="\n".join(restricted[:15]) or "—",
+            inline=False,
+        )
+    if unrestricted:
+        embed.add_field(
+            name=f"🔓 Unrestricted ({len(unrestricted)})",
+            value="  ".join(unrestricted[:20]) or "—",
             inline=False,
         )
     embed.set_footer(text="Administrators always bypass role restrictions.")
@@ -350,18 +392,143 @@ class CategorySelectView(discord.ui.View):
             await interaction.response.send_message("This panel isn't yours.", ephemeral=True)
             return
         category = interaction.data["values"][0]
+        embed = await _category_summary_embed(interaction.guild, category)
+        view  = await CategoryActionView.build(interaction.guild_id, self.author_id, category)
+        await interaction.response.edit_message(embed=embed, view=view)
+
+
+class CategoryActionView(discord.ui.View):
+    """Step 2 — choose: configure the whole category at once, or command by command."""
+    def __init__(self, author_id: int, category: str, has_any_restrictions: bool):
+        super().__init__(timeout=180)
+        self.author_id = author_id
+        self.category  = category
+        bulk = discord.ui.Button(
+            label="📋 Whole Category",
+            style=discord.ButtonStyle.primary,
+            row=0,
+        )
+        bulk.callback = self._bulk
+        self.add_item(bulk)
+        one_by_one = discord.ui.Button(
+            label="⚡ Command by Command",
+            style=discord.ButtonStyle.secondary,
+            row=0,
+        )
+        one_by_one.callback = self._one_by_one
+        self.add_item(one_by_one)
+        if has_any_restrictions:
+            clr = discord.ui.Button(
+                label="🗑️ Clear Entire Category",
+                style=discord.ButtonStyle.danger,
+                row=1,
+            )
+            clr.callback = self._clear_category
+            self.add_item(clr)
+        back = discord.ui.Button(
+            label="← Back",
+            style=discord.ButtonStyle.secondary,
+            row=1,
+        )
+        back.callback = self._go_back
+        self.add_item(back)
+    @classmethod
+    async def build(cls, guild_id: int, author_id: int, category: str) -> "CategoryActionView":
+        cfg   = await get_guild_config(guild_id)
+        rmap  = cfg.get("command_roles", {})
+        keys  = _category_keys(category)
+        has_any = any(k in rmap for k in keys)
+        return cls(author_id, category, has_any)
+    async def _go_back(self, interaction: discord.Interaction):
+        if interaction.user.id != self.author_id:
+            return
         embed = primary_embed(
-            f"🔐 Permissions — {category}",
+            "🔐 Bot Permission Manager",
+            "Select a category to configure role access.",
+        )
+        await interaction.response.edit_message(embed=embed, view=CategorySelectView(self.author_id))
+    async def _bulk(self, interaction: discord.Interaction):
+        if interaction.user.id != self.author_id:
+            await interaction.response.send_message("This panel isn't yours.", ephemeral=True)
+            return
+        cmd_count = len(REGISTRY[self.category]["commands"])
+        embed = primary_embed(
+            f"📋 Whole Category — {self.category}",
+            f"Select roles to apply to **all {cmd_count} commands** in this category at once.\n\n"
+            "› These roles will be **added** on top of any existing restrictions.\n"
+            "› Use **🗑️ Clear Entire Category** first if you want a clean slate.",
+        )
+        await interaction.response.edit_message(
+            embed=embed,
+               view=CategoryBulkAddView(self.author_id, self.category),
+        )
+    async def _one_by_one(self, interaction: discord.Interaction):
+        if interaction.user.id != self.author_id:
+            await interaction.response.send_message("This panel isn't yours.", ephemeral=True)
+            return
+        embed = primary_embed(
+            f"⚡ {self.category} — Pick a Command",
             "Choose the specific command to configure.",
         )
         await interaction.response.edit_message(
             embed=embed,
-            view=CommandSelectView(self.author_id, category),
+            view=CommandSelectView(self.author_id, self.category),
         )
+    async def _clear_category(self, interaction: discord.Interaction):
+        if interaction.user.id != self.author_id:
+            await interaction.response.send_message("This panel isn't yours.", ephemeral=True)
+            return
+        cfg       = await get_guild_config(interaction.guild_id)
+        roles_map = cfg.get("command_roles", {})
+        keys      = _category_keys(self.category)
+        cleared   = sum(1 for k in keys if roles_map.pop(k, None) is not None)
+        await update_guild_config(interaction.guild_id, {"command_roles": roles_map})
+        embed = await _category_summary_embed(interaction.guild, self.category)
+        embed.description = f"✅ Cleared restrictions from **{cleared}** command(s) in this category."
+        view  = await CategoryActionView.build(interaction.guild_id, self.author_id, self.category)
+        await interaction.response.edit_message(embed=embed, view=view)
+class CategoryBulkAddView(discord.ui.View):
+    """Role Select that applies the chosen roles to ALL commands in a category."""
+    def __init__(self, author_id: int, category: str):
+        super().__init__(timeout=180)
+        self.author_id = author_id
+        self.category  = category
+    @discord.ui.select(
+        cls=discord.ui.RoleSelect,
+        placeholder="🎭  Select roles to allow for the whole category…",
+        min_values=1,
+        max_values=10,
+    )
+    async def role_select(self, interaction: discord.Interaction, select: discord.ui.RoleSelect):
+        if interaction.user.id != self.author_id:
+            await interaction.response.send_message("This panel isn't yours.", ephemeral=True)
+            return
+        cfg       = await get_guild_config(interaction.guild_id)
+        roles_map = cfg.get("command_roles", {})
+        new_ids   = {role.id for role in select.values}
+        keys      = _category_keys(self.category)
+        for key in keys:
+            existing = set(roles_map.get(key, []))
+            roles_map[key] = list(existing | new_ids)
+        await update_guild_config(interaction.guild_id, {"command_roles": roles_map})
+        role_mentions = ", ".join(r.mention for r in select.values)
+        embed = await _category_summary_embed(interaction.guild, self.category)
+        embed.description = (
+            f"✅ Added {role_mentions} to all **{len(keys)}** commands in this category."
+        )
+        view = await CategoryActionView.build(interaction.guild_id, self.author_id, self.category)
+        await interaction.response.edit_message(embed=embed, view=view)
+    @discord.ui.button(label="← Cancel", style=discord.ButtonStyle.secondary, row=1)
+    async def cancel(self, interaction: discord.Interaction, _: discord.ui.Button):
+        if interaction.user.id != self.author_id:
+            return
+        embed = await _category_summary_embed(interaction.guild, self.category)
+        view  = await CategoryActionView.build(interaction.guild_id, self.author_id, self.category)
+        await interaction.response.edit_message(embed=embed, view=view)
 
 
 class CommandSelectView(discord.ui.View):
-    """Step 2 — pick a specific command within the category."""
+    """Step 3 (command-by-command path) — pick a specific command within the category."""
 
     def __init__(self, author_id: int, category: str):
         super().__init__(timeout=180)
@@ -391,22 +558,17 @@ class CommandSelectView(discord.ui.View):
     async def _go_back(self, interaction: discord.Interaction):
         if interaction.user.id != self.author_id:
             return
-        embed = primary_embed(
-            "🔐 Bot Permission Manager",
-            "Select a category to configure role access.",
-        )
-        await interaction.response.edit_message(
-            embed=embed, view=CategorySelectView(self.author_id)
-        )
+        embed = await _category_summary_embed(interaction.guild, self.category)
+        view  = await CategoryActionView.build(interaction.guild_id, self.author_id, self.category)
+        await interaction.response.edit_message(embed=embed, view=view)
+
 
     async def _on_select(self, interaction: discord.Interaction):
         if interaction.user.id != self.author_id:
             await interaction.response.send_message("This panel isn't yours.", ephemeral=True)
             return
-        key     = interaction.data["values"][0]
-        group   = REGISTRY[self.category]["group"]
-        # reconstruct display from key
-        parts   = key.split(".", 1)
+        key   = interaction.data["values"][0]
+        parts = key.split(".", 1)
         display = _cmd_display(parts[0], parts[1])
 
         embed = await _perm_embed(interaction.guild, key, display)
@@ -417,7 +579,7 @@ class CommandSelectView(discord.ui.View):
 
 
 class PermissionPanelView(discord.ui.View):
-    """Step 3 — Add / Remove / Clear roles for a command."""
+    """Per-command panel — Add / Remove / Clear roles for a single command."""
 
     def __init__(
         self,
@@ -475,7 +637,7 @@ class PermissionPanelView(discord.ui.View):
         if interaction.user.id != self.author_id:
             return
         embed = primary_embed(
-            f"🔐 Permissions — {self.category}",
+              f"⚡ {self.category} — Pick a Command",
             "Choose the specific command to configure.",
         )
         await interaction.response.edit_message(
@@ -531,7 +693,7 @@ class PermissionPanelView(discord.ui.View):
 
 
 class RoleAddView(discord.ui.View):
-    """Role Select to add allowed roles to a command."""
+    """Role Select to add allowed roles to a single command."""
 
     def __init__(self, author_id: int, category: str, command_key: str, display: str):
         super().__init__(timeout=180)
