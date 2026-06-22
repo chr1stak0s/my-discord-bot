@@ -146,9 +146,12 @@ class DiscordBot(commands.Bot):
 
     async def on_guild_join(self, guild: discord.Guild):
         logger.info(f"Joined guild: {guild.name} ({guild.id}) | Members: {guild.member_count}")
-        # Sync commands to new guild
+        # Copy global commands into this guild so they appear instantly
+        # without waiting for Discord's global propagation delay (up to 1h)
         try:
+            self.tree.copy_global_to(guild=guild)
             await self.tree.sync(guild=guild)
+            logger.info(f"Synced commands to new guild: {guild.name}")
         except Exception as e:
             logger.warning(f"Failed to sync commands in {guild.name}: {e}")
 
