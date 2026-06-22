@@ -37,6 +37,7 @@ EXTENSIONS = [
     "cogs.dm",
     "cogs.privaterooms",
     "cogs.serverstats",
+    "cogs.botperms",
 ]
 
 
@@ -75,6 +76,43 @@ class DiscordBot(commands.Bot):
 
         if failed:
             logger.warning(f"Failed to load {len(failed)} extension(s): {', '.join(failed)}")
+
+        # ── Global role-permission check ──────────────────────────────────────
+        # Runs before EVERY slash command. If an admin has assigned roles to a
+        # command via /bot users, only those roles (+ administrators) may use it.
+        @self.tree.check
+        async def global_role_check(interaction: discord.Interaction) -> bool:
+            if not interaction.guild_id:
+                return True
+            # Administrators always bypass
+            if interaction.user.guild_permissions.administrator:
+                return True
+            cmd = interaction.command
+            if cmd is None:
+                return True
+            # Build "group.name" or "_top.name" key
+            parent = getattr(cmd, "parent", None)
+            if parent and parent.parent is None:
+                # subcommand under a group
+                key = f"{parent.name}.{cmd.name}"
+            elif parent is None:
+                # top-level command
+                key = f"_top.{cmd.name}"
+            else:
+                # subcommand under a subgroup — skip custom check
+                return True
+            from database import get_guild_config
+            cfg      = await get_guild_config(interaction.guild_id)
+            role_ids = cfg.get("command_roles", {}).get(key)
+            if not role_ids:
+                return True  # no restriction configured → use command's own check
+            user_role_ids = {r.id for r in interaction.user.roles}
+            if user_role_ids & set(role_ids):
+                return True
+            raise discord.app_commands.CheckFailure(
+                f"You don't have a required role to use `{key.replace('_top.', '/').replace('.', ' /')}`."
+            )
+
 
         # Sync application commands globally
         try:
