@@ -149,7 +149,7 @@ class DiscordBot(commands.Bot):
         logger.info("=" * 50)
 
         await self.change_presence(
-            activity=discord.CustomActivity(name="Built By xrhstarass"),
+            activity=discord.CustomActivity(name="⚙️ 𝘽𝙪𝙞𝙡𝙩 𝙗𝙮 𝙭𝙧𝙝𝙨𝙩𝙖𝙧𝙖𝙨𝙨"),
             status=discord.Status.do_not_disturb,
         )
 
