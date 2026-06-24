@@ -150,10 +150,10 @@ class DiscordBot(commands.Bot):
 
         await self.change_presence(
             activity=discord.Activity(
-                type=discord.ActivityType.watching,
-                name="Thinking...",
+                type=discord.ActivityType.listening,
+                name="Built By xrhstarass",
             ),
-            status=discord.Status.idle,
+            status=discord.Status.do_not_disturb,
         )
 
     async def on_guild_join(self, guild: discord.Guild):
