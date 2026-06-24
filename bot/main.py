@@ -139,7 +139,7 @@ class DiscordBot(commands.Bot):
         await self.change_presence(
             activity=discord.Activity(
                 type=discord.ActivityType.listening,
-                name=f"{len(self.guilds)} # AND ONLY / Built by xrhstaras",
+                name=f"{len(self.guilds)} Built by xrhstaras",
             ),
             status=discord.Status.do_not_disturb,
         )
