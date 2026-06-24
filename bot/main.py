@@ -125,6 +125,18 @@ class DiscordBot(commands.Bot):
         except Exception as e:
             logger.error(f"Failed to sync commands: {e}", exc_info=True)
 
+              # Also push commands to every guild the bot is already in.
+        # Global commands can take up to 1 hour to propagate; guild-level
+        # commands appear instantly. This fixes "commands visible but broken"
+        # in servers that were joined while the bot was offline.
+        for guild in self.guilds:
+            try:
+                self.tree.copy_global_to(guild=guild)
+                await self.tree.sync(guild=guild)
+                logger.info(f"Synced commands to existing guild: {guild.name} ({guild.id})")
+            except Exception as e:
+                logger.warning(f"Could not sync to guild {guild.name} ({guild.id}): {e}")
+
     async def on_ready(self):
         import datetime
         self.start_time = datetime.datetime.utcnow()
@@ -139,7 +151,7 @@ class DiscordBot(commands.Bot):
         await self.change_presence(
             activity=discord.Activity(
                 type=discord.ActivityType.listening,
-                name=f"{len(self.guilds)} Built by xrhstaras",
+                 name="Built by xrhstaras",
             ),
             status=discord.Status.do_not_disturb,
         )
