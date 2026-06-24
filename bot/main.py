@@ -148,10 +148,10 @@ class DiscordBot(commands.Bot):
         logger.info(f"Latency: {round(self.latency * 1000)}ms")
         logger.info("=" * 50)
 
-        await bot.change_presence(
-    activity=discord.CustomActivity(name="Built By xrhstarass"),
-    status=discord.Status.do_not_disturb
-    )
+        await self.change_presence(
+            activity=discord.CustomActivity(name="Built By xrhstarass"),
+            status=discord.Status.do_not_disturb,
+        )
 
     async def on_guild_join(self, guild: discord.Guild):
         logger.info(f"Joined guild: {guild.name} ({guild.id}) | Members: {guild.member_count}")
